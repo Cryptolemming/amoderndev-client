@@ -1,6 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './AModernDev.css';
+import Header from './Header';
+import Home from './Home';
 
 const mockData = {
   users: {
@@ -91,12 +92,15 @@ const mockData = {
   }
 }
 
-function AModernDev() {
-  return (
-    <main>
+export default class AModernDev extends Component {
 
-    </main>
-  );
+  render() {
+    return (
+      <main>
+        <Header />
+        <Home posts={mockData.posts} />
+      </main>
+    );
+  }
+
 }
-
-export default AModernDev;

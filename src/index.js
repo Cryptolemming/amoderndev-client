@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import AModernDev from './AModernDev';
+import AModernDev from './components/AModernDev';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<AModernDev />, document.getElementById('root'));
