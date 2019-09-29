@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
-import PostList from './PostList';
+import PostsList from './PostsList';
 
 export default class Home extends Component {
 
@@ -8,7 +8,7 @@ export default class Home extends Component {
     return (
       <section className='home'>
         Home
-        <PostList posts={this.props.posts} />
+        <PostsList />
       </section>
     )
   }

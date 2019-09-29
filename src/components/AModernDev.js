@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './AModernDev.css';
 import Header from './Header';
 import Home from './Home';
+import Dashboard from './Dashboard';
+import PostsList from './PostsList';
+import Post from './Post';
+import { Route } from 'react-router-dom';
+import APIContext from '../context/APIContext';
 
 const mockData = {
   users: {
@@ -94,12 +99,58 @@ const mockData = {
 
 export default class AModernDev extends Component {
 
+  state = {
+    users: {},
+    posts: {},
+    comments: {}
+  }
+
+  componentDidMount() {
+    this.setState({
+      users: mockData.users,
+      posts: mockData.posts,
+      comments: mockData.comments
+    })
+  }
+
   render() {
+
+    const { users, posts, comments } = this.state;
+
+    const value = { users, posts, comments };
+
     return (
-      <main>
-        <Header />
-        <Home posts={mockData.posts} />
-      </main>
+      <APIContext.Provider value={value}>
+        <>
+          <Header />
+
+          <main>
+            <Route
+              exact
+              path='/'
+              component={Home}
+            />
+
+            <Route
+              exact
+              path='/user/:userId'
+              component={Dashboard}
+            />
+
+            <Route
+              exact
+              path='/posts'
+              component={PostsList}
+            />
+
+            <Route
+              exact
+              path='/posts/:postId'
+              component={Post}
+            />
+          </main>
+        </>
+      </APIContext.Provider>
     );
   }
 
