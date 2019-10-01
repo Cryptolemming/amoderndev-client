@@ -18,7 +18,7 @@ export default class Post extends Component {
     const post = this.context.posts[postId] || {
       title: '',
       user: '',
-      date: '',
+      date_created: '',
       content: ''
     }
 
@@ -26,7 +26,7 @@ export default class Post extends Component {
       <div className='post'>
         <h3>{post.title}</h3>
         <span>{post.user}</span>
-        <span>{post.date}</span>
+        <span>{post.date_created}</span>
         <p>{post.content}</p>
       </div>
     )
