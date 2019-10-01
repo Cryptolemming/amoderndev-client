@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PostItem from './Post';
+import PostItem from './PostItem';
 import './PostsList.css';
 import uuid from 'uuid/v4';
 import APIContext from '../context/APIContext';
@@ -10,7 +10,7 @@ export default class PostsList extends Component {
   render() {
 
     const list = this.generateList();
-
+    console.log(list)
     return (
       <ul>
         {list}

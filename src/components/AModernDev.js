@@ -94,7 +94,8 @@ const mockData = {
       date_created: '2019-09-22T20:00:03.877Z',
       content: 'text comment'
     }
-  }
+  },
+  user: 1
 }
 
 export default class AModernDev extends Component {
@@ -102,22 +103,24 @@ export default class AModernDev extends Component {
   state = {
     users: {},
     posts: {},
-    comments: {}
+    comments: {},
+    user: 1
   }
 
   componentDidMount() {
     this.setState({
       users: mockData.users,
       posts: mockData.posts,
-      comments: mockData.comments
+      comments: mockData.comments,
+      user: 1
     })
   }
 
   render() {
 
-    const { users, posts, comments } = this.state;
+    const { users, posts, comments, user } = this.state;
 
-    const value = { users, posts, comments };
+    const value = { users, posts, comments, user };
 
     return (
       <APIContext.Provider value={value}>
@@ -133,7 +136,7 @@ export default class AModernDev extends Component {
 
             <Route
               exact
-              path='/user/:userId'
+              path='/users/:userId'
               component={Dashboard}
             />
 
@@ -148,6 +151,7 @@ export default class AModernDev extends Component {
               path='/posts/:postId'
               component={Post}
             />
+
           </main>
         </>
       </APIContext.Provider>

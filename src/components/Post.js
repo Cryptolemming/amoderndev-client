@@ -3,12 +3,18 @@ import APIContext from '../context/APIContext';
 import './Post.css';
 
 export default class Post extends Component {
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
 
   static contextType = APIContext;
 
   render() {
 
     const { postId } = this.props.match.params;
+    console.log(postId)
     const post = this.context.posts[postId] || {
       title: '',
       user: '',
