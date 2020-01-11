@@ -13,3 +13,13 @@ export default class Home extends Component {
   }
 
 }
+
+
+state = {
+  athletes: {
+    1: {
+      ...athleteData,
+      ...liftData
+    }
+  }
+}
