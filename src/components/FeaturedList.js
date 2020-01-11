@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PostItem from './PostItem';
-import './PostsList.css';
+import './FeaturedList.css';
 
-export default class PostsList extends Component {
+export default class FeaturedList extends Component {
 
   render() {
 
@@ -16,8 +15,8 @@ export default class PostsList extends Component {
   }
 
   generateList = () => {
-    return Object.entries(this.props.posts).map(([id, post]) => {
-      return <PostItem key={id} {...post} />
+    return Object.values(this.state.posts).map(post => {
+      return <FeaturedItem key={post.id} {...post} />
     })
   }
 

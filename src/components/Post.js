@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import APIContext from '../context/APIContext';
 import './Post.css';
 
 export default class Post extends Component {
@@ -9,13 +8,11 @@ export default class Post extends Component {
     }
   }
 
-  static contextType = APIContext;
-
   render() {
 
     const { postId } = this.props.match.params;
     console.log(postId)
-    const post = this.context.posts[postId] || {
+    const post = this.state.posts[postId] || {
       title: '',
       user: '',
       date_created: '',

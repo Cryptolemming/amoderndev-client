@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import './Home.css';
 import PostsList from './PostsList';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions';
 
-export default class Home extends Component {
+export class Home extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(fetchPosts())
+  }
 
   render() {
+
+    const { posts } = this.props;
+
     return (
-      <section className='home'>
-        <PostsList />
-      </section>
+      <>
+        <PostsList posts={posts} />
+      </>
     )
   }
 
 }
 
+const mapStateToProps = state => ({
+  posts: state.posts
+})
 
-state = {
-  athletes: {
-    1: {
-      ...athleteData,
-      ...liftData
-    }
-  }
-}
+export default connect(mapStateToProps)(Home);

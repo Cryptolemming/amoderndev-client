@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
-import APIContext from '../context/APIContext';
+import { connect } from 'react-redux';
 
-export default class Header extends Component {
-
-  static contextType = APIContext;
+export class Header extends Component {
 
   render() {
 
-    const user = this.context.user
+    const user = this.props.user
 
     return (
       <header>
@@ -20,3 +18,9 @@ export default class Header extends Component {
   }
 
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(Header);

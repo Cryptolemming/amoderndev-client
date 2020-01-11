@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
-import APIContext from '../context/APIContext';
 
 export default class Dashboard extends Component {
 
@@ -9,8 +8,6 @@ export default class Dashboard extends Component {
       params: {}
     }
   }
-
-  static contextType = APIContext;
 
   render() {
 
