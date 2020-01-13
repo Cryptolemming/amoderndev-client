@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './FeaturedList.css';
+import FeaturedItem from './FeaturedItem';
 
 export default class FeaturedList extends Component {
 
@@ -15,8 +16,8 @@ export default class FeaturedList extends Component {
   }
 
   generateList = () => {
-    return Object.values(this.state.posts).map(post => {
-      return <FeaturedItem key={post.id} {...post} />
+    return Object.entries(this.props.posts).map(([id, post]) => {
+      return <FeaturedItem key={id} {...post} />
     })
   }
 

@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import './Post.css';
+import { connect } from 'react-redux';
 
-export default class Post extends Component {
-  static defaultProps = {
-    match: {
-      params: {}
-    }
-  }
+export class Post extends Component {
 
   render() {
 
     const { postId } = this.props.match.params;
-    console.log(postId)
-    const post = this.state.posts[postId] || {
+
+    const post = this.props.posts[postId] || {
       title: '',
       user: '',
       date_created: '',
@@ -30,3 +26,9 @@ export default class Post extends Component {
   }
 
 }
+
+const mapStateToProps = state => ({
+  posts: state.posts
+})
+
+export default connect(mapStateToProps)(Post)
