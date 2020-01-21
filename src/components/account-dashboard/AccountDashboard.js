@@ -4,7 +4,7 @@ import './AccountDashboard.css';
 export default class AccountDashboard extends Component {
 
   static defaultProps = {
-    matchL: {
+    match: {
       params: {}
     }
   }
@@ -19,11 +19,8 @@ export default class AccountDashboard extends Component {
     }
 
     return (
-      <section className='AccountDashboard'>
-        <p>{user.id}</p>
-        <p>{user.username}</p>
-        <p>posts here</p>
-        <p>comments here</p>
+      <section className='account-dashboard'>
+        Account Dashboard
       </section>
     )
   }
