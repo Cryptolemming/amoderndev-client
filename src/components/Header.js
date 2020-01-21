@@ -1,20 +1,42 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
+import navLinks from '../helpers/nav-links';
 import { connect } from 'react-redux';
+import uuid from 'uuid/v4';
 
 export class Header extends Component {
 
   render() {
 
-    const user = this.props.user
+    const user = this.props.user;
+    const navLinksJSX = this.generateNavLinks();
 
     return (
       <header>
-        <Link to='/'><h1>a modern dev</h1></Link>
-        <Link to={`/users/${user}`}><span>account</span></Link>
+        <section className='auth-nav'>
+          <Link to='/'><h1>AMD</h1></Link>
+          <Link to={`/users/${user}`}>
+            <span className='account-icon'>account</span>
+          </Link>
+        </section>
+        <nav>
+          <ul className='nav-links'>
+            {navLinksJSX}
+          </ul>
+        </nav>
       </header>
     )
+  }
+
+  generateNavLinks = () => {
+    return navLinks.map(link => {
+      return (
+        <li key={uuid()} className='nav-links-item'>
+          <Link to={`${link}`}>{link}</Link>
+        </li>
+      )
+    })
   }
 
 }
