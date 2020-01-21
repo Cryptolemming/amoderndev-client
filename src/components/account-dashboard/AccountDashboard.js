@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Dashboard.css';
+import './AccountDashboard.css';
 
-export default class Dashboard extends Component {
+export default class AccountDashboard extends Component {
 
   static defaultProps = {
     matchL: {
@@ -19,7 +19,7 @@ export default class Dashboard extends Component {
     }
 
     return (
-      <section className='dashboard'>
+      <section className='AccountDashboard'>
         <p>{user.id}</p>
         <p>{user.username}</p>
         <p>posts here</p>
