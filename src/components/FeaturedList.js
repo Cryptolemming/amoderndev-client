@@ -7,9 +7,9 @@ export default class FeaturedList extends Component {
   render() {
 
     const list = this.generateList();
-    console.log(list)
+
     return (
-      <ul>
+      <ul className='featured-list'>
         {list}
       </ul>
     )
