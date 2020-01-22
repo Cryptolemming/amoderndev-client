@@ -7,6 +7,7 @@ header {
   justify-content: space-between;
   align-content: center;
   padding: 5px 10px;
+  font-family: 'Helvetica';
 }
 
 header a {
@@ -42,6 +43,11 @@ h1 {
   color: #333;
   background: #F8F8FF;
   font-size: 12px;
+  border: 1px solid #F8F8FF;
+}
+
+.account-icon:hover {
+  border: 1px solid #FF0000;
 }
 
 .nav-links {
@@ -53,4 +59,8 @@ h1 {
   display: inline;
   margin: 0 5px;
   border: 0;
+}
+
+.nav-links-item:hover {
+  border-bottom: 1px solid #FF0000;
 }

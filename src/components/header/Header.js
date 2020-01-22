@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import navLinks from '../helpers/nav-links';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
+import AccountIcon from './AccountIcon';
 
 export class Header extends Component {
 
@@ -16,9 +17,7 @@ export class Header extends Component {
       <header>
         <section className='auth-nav'>
           <Link to='/'><h1>AMD</h1></Link>
-          <Link to={`/users/${user}`}>
-            <span className='account-icon'>account</span>
-          </Link>
+          <AccountIcon />
         </section>
         <nav>
           <ul className='nav-links'>
