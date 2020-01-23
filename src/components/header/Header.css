@@ -31,23 +31,8 @@ nav {
 }
 
 h1 {
-  display: inline;
   font-size: 20px;
   margin-right: 10px;
-}
-
-.account-icon {
-  vertical-align: middle;
-  border-radius: 50%;
-  padding: 15px 5px;
-  color: #333;
-  background: #F8F8FF;
-  font-size: 12px;
-  border: 1px solid #F8F8FF;
-}
-
-.account-icon:hover {
-  border: 1px solid #FF0000;
 }
 
 .nav-links {

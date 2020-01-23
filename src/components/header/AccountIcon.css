@@ -1,0 +1,30 @@
+.account-icon {
+  vertical-align: middle;
+  border-radius: 50%;
+  padding: 15px 5px;
+  color: #333;
+  background: #F8F8FF;
+  font-size: 12px;
+  border: 1px solid #F8F8FF;
+}
+
+.account-icon:hover {
+  border: 1px solid #FF0000;
+}
+
+.credentials-list {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: #FF0000;
+  margin-top: 18px;
+}
+
+.credentials-list-item {
+  padding: 0 5px;
+  border: 0;
+}
+
+.credentials-list-item:hover {
+  color: #FF0000;
+}

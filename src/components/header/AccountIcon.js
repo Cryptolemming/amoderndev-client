@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import './AccountIcon.css';
+import { Link } from 'react-router-dom';
 
 export default props => {
-  return props.user
+  const { user } = props;
+
+  return user
   ? <Link to={`/users/${user.id}`}>
       <span className='account-icon'>account</span>
     </Link>
   : <ul className='credentials-list'>
-      <li className='credentials-list-item'>
-        <Link to={`/authenticate/login`}></Link>
-      </li>
-      <li className='credentials-list-item'>
-        <Link to={`/authenticate/register`}></Link>
-      </li>
+      <Link to={`/authenticate/login`}>
+        <li className='credentials-list-item'>
+          login
+        </li>
+      </Link>
+      |
+      <Link to={`/authenticate/register`}>
+        <li className='credentials-list-item'>
+          register
+        </li>
+      </Link>
     </ul>
 }

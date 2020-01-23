@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AModernDev.css';
-import Header from './Header';
+import Header from './header/Header';
 import Home from './home/Home';
 import AccountDashboard from './account-dashboard/AccountDashboard';
 import Post from './post/Post';
