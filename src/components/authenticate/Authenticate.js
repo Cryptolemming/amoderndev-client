@@ -3,10 +3,8 @@ import './Authenticate.css';
 
 export default class Authenticate extends Component {
 
-  static defaultProps = {
-    match: {
-      params: {}
-    }
+  state = {
+    selected: 'register'
   }
 
   render() {
@@ -17,4 +15,24 @@ export default class Authenticate extends Component {
       </section>
     )
   }
+
+  generateAuthForm = () => {
+    const { selected } = this.state;
+    const formProps = this.generateFormProps(selected)
+    return <Form type={selected} {...formProps} />
+  }
+
+  generateFormProps = selected => {
+    const formProps = {
+      'register': {
+        inputs: ['username', 'password'],
+      },
+      'login': {
+        inputs: ['username', 'email', 'password', 'repeat password']
+      }
+    }
+
+    return formProps[selected]
+  }
+
 }
