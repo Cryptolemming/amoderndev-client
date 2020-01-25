@@ -7,11 +7,21 @@ export default class Authenticate extends Component {
     selected: 'register'
   }
 
+  handleChangeSelected = e => {
+    this.setState = () => ({
+      selected: e.target.value
+    })
+  }
+
   render() {
 
     return (
       <section className='authenticate'>
         Authenticate
+        <div className='auth-selection'>
+          <button className='auth-selection-button login-button' onClick={this.handleChangeSelected}>Login</button>
+          <button className='auth-selection-button register-button' onClick={this.handleChangeSelected}>Register</button>
+        </div>
       </section>
     )
   }
@@ -25,11 +35,20 @@ export default class Authenticate extends Component {
   generateFormProps = selected => {
     const formProps = {
       'register': {
-        inputs: ['username', 'password'],
+        inputs: {
+          username: '',
+          password: ''
+        }
       },
       'login': {
-        inputs: ['username', 'email', 'password', 'repeat password']
-      }
+        inputs: {
+          username: '',
+          email: '',
+          password: '',
+          'confirm password': ''
+        }
+      },
+      class: 'auth-form'
     }
 
     return formProps[selected]
