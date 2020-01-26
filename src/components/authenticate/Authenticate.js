@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Authenticate.css';
+import Form from '../form/Form';
 
 export default class Authenticate extends Component {
 
@@ -8,19 +9,22 @@ export default class Authenticate extends Component {
   }
 
   handleChangeSelected = e => {
-    this.setState = () => ({
+    this.setState({
       selected: e.target.value
     })
   }
 
   render() {
 
+    const form = this.generateAuthForm();
+
     return (
       <section className='authenticate'>
         Authenticate
+        {form}
         <div className='auth-selection'>
-          <button className='auth-selection-button login-button' onClick={this.handleChangeSelected}>Login</button>
-          <button className='auth-selection-button register-button' onClick={this.handleChangeSelected}>Register</button>
+          <button value='login' className='auth-selection-button login-button' onClick={this.handleChangeSelected}>Login</button>
+          <button value='register' className='auth-selection-button register-button' onClick={this.handleChangeSelected}>Register</button>
         </div>
       </section>
     )
@@ -29,18 +33,19 @@ export default class Authenticate extends Component {
   generateAuthForm = () => {
     const { selected } = this.state;
     const formProps = this.generateFormProps(selected)
+    console.log(formProps)
     return <Form type={selected} {...formProps} />
   }
 
   generateFormProps = selected => {
     const formProps = {
-      'register': {
+      'login': {
         inputs: {
           username: '',
           password: ''
         }
       },
-      'login': {
+      'register': {
         inputs: {
           username: '',
           email: '',
@@ -48,7 +53,6 @@ export default class Authenticate extends Component {
           'confirm password': ''
         }
       },
-      class: 'auth-form'
     }
 
     return formProps[selected]

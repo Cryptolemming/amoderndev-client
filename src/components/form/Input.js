@@ -3,12 +3,12 @@ import './Input.css';
 
 export default class Input extends Component {
 
-  state = {
-
-  }
-
   render() {
 
+    const { type, name, value, className, onChange } = this.props;
+    const attrs = { type, name, value, className, onChange }
+
+    return <input {...attrs} />
   }
 
 }
