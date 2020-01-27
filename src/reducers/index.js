@@ -9,12 +9,17 @@ const initialState = {
 export default (state = initialState, action) => {
   switch(action.type) {
     case ACTIONS.FETCH_POSTS_SUCCESS:
-    console.log(action.posts)
       const posts = action.posts.reduce((acc, post) => {
         acc[post.id] = post;
         return acc;
       }, {})
       return Object.assign({}, state, { posts })
+    case ACTIONS.REGISTER_USER_SUCCESS:
+      const { user } = action;
+      return Object.assign({}, state, { user })
+    case ACTIONS.LOGIN_USER_SUCCESS:
+      const { token } = action;
+      return Object.assign({}, state, { token })
     default:
       return state;
   }

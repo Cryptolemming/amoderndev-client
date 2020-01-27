@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
-import navLinks from '../../helpers/nav-links';
+import navLinks from '../../constants/nav-links';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import AccountIcon from './AccountIcon';

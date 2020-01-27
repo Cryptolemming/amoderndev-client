@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './Form.css';
 import Input from './Input';
 import uuid from 'uuid/v4';
+import { connect } from 'react-redux';
 
-export default class Form extends Component {
+export class Form extends Component {
 
   state = {
     type: this.props.type,
@@ -22,7 +23,7 @@ export default class Form extends Component {
     const { inputs } = this.state;
 
     const updatedInputs = {
-      ...this.state.inputs,
+      ...inputs,
       [e.target.name]: e.target.value
     }
 
@@ -32,19 +33,23 @@ export default class Form extends Component {
   }
 
   onSubmitForm = e => {
+    e.preventDefault();
 
+    const { inputs } = this.state;
+    const {dispatch, onSubmit } = this.props;
+    console.log(inputs)
+    dispatch(onSubmit(inputs))
   }
 
   render() {
     const inputs = this.generateInputJSX()
 
     return (
-      <form className={this.props.class}>
+      <form onSubmit={this.onSubmitForm} className={this.props.class}>
         <fieldset>
           {inputs}
           <input
             type='submit'
-            onSubmit={this.onSubmitForm}
             className={`${this.props.class}-submit`}
             value='submit'
           />
@@ -61,7 +66,7 @@ export default class Form extends Component {
         type: input === 'confirm password' ? 'password': input,
         name: input,
         placeholder: input,
-        minLength: input === 'login' ? 3 : 8,
+        minLength: input === 'password' ? 8 : 3,
         maxLength: 64,
         value
       };
@@ -76,3 +81,5 @@ export default class Form extends Component {
   }
 
 }
+
+export default connect()(Form)

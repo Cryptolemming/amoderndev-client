@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Authenticate.css';
 import Form from '../form/Form';
 import { Link } from 'react-router-dom';
+import { registerUser, loginUser } from '../../actions';
 
 export default class Authenticate extends Component {
 
@@ -31,7 +32,11 @@ export default class Authenticate extends Component {
   generateAuthForm = authType => {
     const authFormProps = this.generateAuthFormProps(authType)
 
-    return <Form class='auth-form' type={authType} {...authFormProps} />
+    return <Form
+      class='auth-form'
+      type={authType}
+      {...authFormProps}
+    />
   }
 
   generateAuthFormProps = authType => {
@@ -40,7 +45,8 @@ export default class Authenticate extends Component {
         inputs: {
           username: '',
           password: ''
-        }
+        },
+        onSubmit: loginUser,
       },
       'register': {
         inputs: {
@@ -48,7 +54,8 @@ export default class Authenticate extends Component {
           email: '',
           password: '',
           'confirm password': ''
-        }
+        },
+        onSubmit: registerUser,
       },
     }
 

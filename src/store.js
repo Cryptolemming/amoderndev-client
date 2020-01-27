@@ -4,5 +4,5 @@ import reducer from './reducers';
 
 export default createStore(
 	reducer,
-	applyMiddleware(thunk)
+	applyMiddleware(thunk),
 );
