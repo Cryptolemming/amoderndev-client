@@ -13,9 +13,9 @@ export const fetchPostsError = err => ({
 })
 
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
-export const loginUserSuccess = token => ({
+export const loginUserSuccess = user => ({
   type: LOGIN_USER_SUCCESS,
-  token
+  user
 })
 
 export const LOGIN_USER_ERROR = 'LOGIN_USER_ERROR';
@@ -52,12 +52,12 @@ export const registerUser = () => (dispatch, user) => {
     .catch(err => dispatch(loginUserError))
 }
 
-export const loginUser = () => (dispatch, user) => {
-  return fetch('localhost:8000/auth/login', {
-      type: 'POST',
+export const loginUser = (user) => (dispatch) => {
+  return fetch('http://localhost:8000/auth/login', {
+      method: 'POST',
       body: JSON.stringify(user),
       headers: {
-        'CONTENT-TYPE': 'application/json'
+        'Content-Type': 'application/json'
       }
     })
     .then(res => {
@@ -67,11 +67,13 @@ export const loginUser = () => (dispatch, user) => {
 
       return res.json()
     })
-    .then(token => {
-      dispatch(loginUserSuccess(token))
+    .then(authData => {
+      const { user, authToken: token } = authData;
+
+      dispatch(loginUserSuccess(user))
       handleJWTToken(token)
     })
-    .catch(err => dispatch(loginUserError))
+    .catch(err => console.log(err))
 }
 
 export const fetchPosts = () => (dispatch) => {

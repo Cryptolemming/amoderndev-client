@@ -18,8 +18,7 @@ export default (state = initialState, action) => {
       const { user } = action;
       return Object.assign({}, state, { user })
     case ACTIONS.LOGIN_USER_SUCCESS:
-      const { token } = action;
-      return Object.assign({}, state, { token })
+      return Object.assign({}, state, { user: action.user })
     default:
       return state;
   }
