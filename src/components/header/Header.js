@@ -32,7 +32,7 @@ export class Header extends Component {
     return navLinks.map(link => {
       return (
         <li key={uuid()} className='nav-links-item'>
-          <Link to={`${link}`}>{link}</Link>
+          <Link to={`/${link}`}>{link}</Link>
         </li>
       )
     })

@@ -10,10 +10,11 @@ export default class Authenticate extends Component {
     const { auth_type: authType } = this.props.match.params
 
     const form = this.generateAuthForm(authType);
+    const formHeader = authType === 'login' ? 'Login' : 'Register';
 
     return (
       <section className='authenticate'>
-        Authenticate
+        {formHeader}
         {form}
         <div className='auth-selection'>
           <Link to='login'>

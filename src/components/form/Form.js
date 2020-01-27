@@ -21,12 +21,13 @@ export default class Form extends Component {
   onChangeInput = e => {
     const { inputs } = this.state;
 
-    const updatedInputs = {...inputs,
-      [this.props.type]: e.target.value
+    const updatedInputs = {
+      ...this.state.inputs,
+      [e.target.name]: e.target.value
     }
 
-    this.setState = state => ({
-        inputs: updatedInputs
+    this.setState({
+      inputs: updatedInputs
     })
   }
 
@@ -53,9 +54,8 @@ export default class Form extends Component {
   }
 
   generateInputJSX = () => {
-    return Object.entries(this.state.inputs).map(([input, value]) => {
+    return Object.entries(this.state.inputs).map(([input, value], idx) => {
       const inputProps = {
-        key: uuid(),
         onChange: this.onChangeInput,
         className: `${this.props.class}-input`,
         type: input === 'confirm password' ? 'password': input,
@@ -67,7 +67,7 @@ export default class Form extends Component {
       };
 
       return (
-        <label key={uuid()} htmlFor={input}>
+        <label key={`${input}-idx`} htmlFor={input}>
           {input}
           <Input {...inputProps} />
         </label>
