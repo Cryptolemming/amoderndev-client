@@ -1,43 +1,39 @@
 import React, { Component } from 'react';
 import './Authenticate.css';
 import Form from '../form/Form';
+import { Link } from 'react-router-dom';
 
 export default class Authenticate extends Component {
 
-  state = {
-    selected: 'register'
-  }
-
-  handleChangeSelected = e => {
-    this.setState({
-      selected: e.target.value
-    })
-  }
-
   render() {
 
-    const form = this.generateAuthForm();
+    const { auth_type: authType } = this.props.match.params
+
+    const form = this.generateAuthForm(authType);
 
     return (
       <section className='authenticate'>
         Authenticate
         {form}
         <div className='auth-selection'>
-          <button value='login' className='auth-selection-button login-button' onClick={this.handleChangeSelected}>Login</button>
-          <button value='register' className='auth-selection-button register-button' onClick={this.handleChangeSelected}>Register</button>
+          <Link to='login'>
+            <button value='login' className='auth-selection-button login-button' onClick={this.handleChangeSelected}>Login</button>
+          </Link>
+          <Link to='register'>
+            <button value='register' className='auth-selection-button register-button' onClick={this.handleChangeSelected}>Register</button>
+          </Link>
         </div>
       </section>
     )
   }
 
-  generateAuthForm = () => {
-    const { selected } = this.state;
-    const formProps = this.generateFormProps(selected)
-    console.log(formProps)
-    return <Form type={selected} {...formProps} />
+  generateAuthForm = authType => {
+    const authFormProps = this.generateAuthFormProps(authType)
+
+    return <Form class='auth-form' type={authType} {...authFormProps} />
   }
 
-  generateFormProps = selected => {
+  generateAuthFormProps = authType => {
     const formProps = {
       'login': {
         inputs: {
@@ -55,7 +51,7 @@ export default class Authenticate extends Component {
       },
     }
 
-    return formProps[selected]
+    return formProps[authType]
   }
 
 }

@@ -1,0 +1,12 @@
+.auth-form label {
+  padding: 0 5px;
+  display: block;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.auth-form-input {
+  padding: 5px 8px;
+}

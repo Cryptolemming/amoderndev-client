@@ -1,0 +1,24 @@
+.auth-form {
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: 15px 25px;
+}
+
+.auth-form fieldset {
+  border: 0;
+}
+
+.auth-form-submit {
+  margin-top: 25px;
+  padding: 15px 25px;
+  background: black;
+  color: #f8f8ff;
+  border: 0;
+  font-size: 16px;
+}
+
+.auth-form-submit:hover {
+  background: #121211;
+}

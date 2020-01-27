@@ -57,7 +57,8 @@ export default class AModernDev extends Component {
             />
 
             <Route
-              path='/authenticate'
+              exact
+              path='/authenticate/:auth_type'
               component={Authenticate}
             />
 
