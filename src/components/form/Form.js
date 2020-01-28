@@ -8,7 +8,8 @@ export class Form extends Component {
 
   state = {
     type: this.props.type,
-    inputs: this.props.inputs
+    inputs: this.props.inputs,
+    passwordMatch: true
   }
 
   componentDidUpdate = prevProps => {
@@ -34,9 +35,19 @@ export class Form extends Component {
 
   onSubmitForm = e => {
     e.preventDefault();
+    console.log(this.state.type)
+    const { type, inputs } = this.state;
+    if (type === 'register' && !this.isMatchingPassword(inputs['password'], inputs['confirm password'])) {
+      this.informPasswordMismatch()
+    } else {
+      this.sendFormRegistration()
+    }
+  }
 
+  sendFormRegistration = () => {
     const { inputs } = this.state;
     const {dispatch, onSubmit, push } = this.props;
+
     dispatch(onSubmit(inputs))
       .then(user => {
         console.log(user)
@@ -44,13 +55,21 @@ export class Form extends Component {
       })
   }
 
+  informPasswordMismatch = () => {
+    this.setState({
+      passwordMatch: false
+    })
+  }
+
   render() {
-    const inputs = this.generateInputJSX()
+    const inputs = this.generateInputJSX();
+    const passwordMismatch = this.generateMatchingPasswordJSX();
 
     return (
       <form onSubmit={this.onSubmitForm} className={this.props.class}>
         <fieldset>
           {inputs}
+          {passwordMismatch}
           <input
             type='submit'
             className={`${this.props.class}-submit`}
@@ -66,7 +85,7 @@ export class Form extends Component {
       const inputProps = {
         onChange: this.onChangeInput,
         className: `${this.props.class}-input`,
-        type: input === 'confirm password' ? 'password': input,
+        type: input === 'confirm password' ? 'password' : input,
         name: input,
         placeholder: input,
         minLength: input === 'password' ? 8 : 3,
@@ -81,6 +100,15 @@ export class Form extends Component {
         </label>
       );
     })
+  }
+
+  generateMatchingPasswordJSX = () => {
+    const { passwordMatch } = this.state;
+    return passwordMatch ? '' : <span className='password-mismatch'>passwords do not match</span>
+  }
+
+  isMatchingPassword = (passwordOne, passwordTwo) => {
+    return passwordOne === passwordTwo;
   }
 
 }
