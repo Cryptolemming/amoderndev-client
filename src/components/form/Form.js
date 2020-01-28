@@ -36,9 +36,12 @@ export class Form extends Component {
     e.preventDefault();
 
     const { inputs } = this.state;
-    const {dispatch, onSubmit } = this.props;
-    console.log(inputs)
+    const {dispatch, onSubmit, push } = this.props;
     dispatch(onSubmit(inputs))
+      .then(user => {
+        console.log(user)
+        push(`/`)
+      })
   }
 
   render() {

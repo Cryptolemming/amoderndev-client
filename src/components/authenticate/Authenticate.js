@@ -35,6 +35,7 @@ export default class Authenticate extends Component {
     return <Form
       class='auth-form'
       type={authType}
+      push={this.props.history.push}
       {...authFormProps}
     />
   }

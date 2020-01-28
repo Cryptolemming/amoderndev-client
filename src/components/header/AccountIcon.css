@@ -1,11 +1,12 @@
 .account-icon {
-  vertical-align: middle;
   border-radius: 50%;
   padding: 15px 5px;
   color: #333;
   background: #F8F8FF;
   font-size: 12px;
   border: 1px solid #F8F8FF;
+  display: inline-block;
+  margin-top: 5px;
 }
 
 .account-icon:hover {

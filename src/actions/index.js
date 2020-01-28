@@ -72,6 +72,7 @@ export const loginUser = (user) => (dispatch) => {
 
       dispatch(loginUserSuccess(user))
       handleJWTToken(token)
+      return user;
     })
     .catch(err => console.log(err))
 }
