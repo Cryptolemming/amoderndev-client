@@ -1,9 +1,10 @@
-li {
-  list-style-type: none;
-  padding: 5px 0;
-  border: .8px solid #ccc;
-}
-
-span {
-  margin: 0 8px;
+.posts-list-item {
+  border: .5px solid #ddd;
+  padding: 15px;
+  align-content: center;
+  justify-content: center;
+  width: 240px;
+  height: 200px;
+  margin: 8px;
+  border-radius: 5px;
 }

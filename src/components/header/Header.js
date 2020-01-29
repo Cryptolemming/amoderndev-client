@@ -16,7 +16,7 @@ export class Header extends Component {
     return (
       <header>
         <section className='auth-nav'>
-          <Link to='/'><h1>AMD</h1></Link>
+          <h1><Link to='/'>AMD</Link></h1>
           <AccountIcon user={user} />
         </section>
         <nav>

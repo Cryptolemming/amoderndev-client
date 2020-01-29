@@ -7,7 +7,7 @@ export default ({id, user, date_created, title, content}) => {
 
   return (
     <Link to={`/posts/${id}`}>
-      <li>
+      <li className='featured-list-item'>
         <p>{title}</p>
         <span>{user}</span>
         <span>{date_created}</span>

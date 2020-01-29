@@ -1,0 +1,29 @@
+.featured-list-container {
+  border-top: .5px solid #ddd;
+  padding: 15px 5px 0;
+  margin: 25px 0;
+  overflow: hidden;
+}
+
+.featured-list {
+  display: inline-flex;
+  justify-content: center;
+  border: 1px solid blue;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 90%;
+}
+
+.home-list-title {
+  font-style: bold;
+  margin: 0;
+}
+
+.left-arrow {
+  border: 1px solid black;
+  margin: 0;
+}
+
+.right-arrow {
+  border: 1px solid black;
+}

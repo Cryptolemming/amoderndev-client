@@ -1,0 +1,10 @@
+.featured-list-item {
+  border: .5px solid #ddd;
+  padding: 15px;
+  align-content: center;
+  justify-content: center;
+  width: 280px;
+  height: 200px;
+  margin: 0 8px;
+  border-radius: 5px;
+}

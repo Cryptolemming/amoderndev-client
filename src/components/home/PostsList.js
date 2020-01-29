@@ -7,11 +7,14 @@ export default class PostsList extends Component {
   render() {
 
     const list = this.generateList();
-    console.log(list)
+
     return (
-      <ul>
-        {list}
-      </ul>
+      <section className='posts-list-container'>
+        <h3 className='home-list-title'>Posts</h3>
+        <ul className='posts-list'>
+          {list}
+        </ul>
+      </section>
     )
   }
 

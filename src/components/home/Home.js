@@ -16,10 +16,10 @@ export class Home extends Component {
     const { posts } = this.props;
 
     return (
-      <>
+      <section className='home-container'>
         <FeaturedList posts={posts} />
         <PostsList posts={posts} />
-      </>
+      </section>
     )
   }
 

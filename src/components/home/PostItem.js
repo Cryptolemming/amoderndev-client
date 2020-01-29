@@ -7,7 +7,7 @@ export default ({id, user, date_created, title, content, comments}) => {
 
   return (
     <Link to={`/posts/${id}`}>
-      <li>
+      <li className='posts-list-item'>
         <p>{title}</p>
         <span>{user}</span>
         <span>{date_created}</span>

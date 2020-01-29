@@ -1,3 +1,22 @@
-ul {
-  padding: 0;
+.posts-list-container {
+  border-top: .5px solid #ddd;
+  padding: 15px 5px;
+  margin: 25px 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  max-width: 1920px;
+}
+
+.posts-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.home-list-title {
+  font-style: bold;
+  margin: 0;
 }
