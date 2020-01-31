@@ -2,7 +2,11 @@
   border-top: .5px solid #ddd;
   padding: 15px 5px 0;
   margin: 25px 0;
-  overflow: hidden;
+  max-width: 1920px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 
 .featured-list {
@@ -17,13 +21,23 @@
 .home-list-title {
   font-style: bold;
   margin: 0;
+  margin-bottom: 15px;
 }
 
-.left-arrow {
-  border: 1px solid black;
-  margin: 0;
+.horizontal-container {
+  display: flex;
+  border: 1px solid red;
+  justify-content: center;
 }
 
-.right-arrow {
-  border: 1px solid black;
+.arrow {
+  font-size: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  font-weight: bold;
 }

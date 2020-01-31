@@ -11,15 +11,17 @@ export default class FeaturedList extends Component {
     return (
       <section className='featured-list-container'>
         <h3 className='home-list-title'>Featured</h3>
-        <span className='left-arrow'>
-          &lArr;
-        </span>
-        <ul className='featured-list'>
-          {list}
-        </ul>
-        <span className='right-arrow'>
-          &rArr;
-        </span>
+        <section className='horizontal-container'>
+          <span className='arrow'>
+            &lArr;
+          </span>
+          <ul className='featured-list'>
+            {list}
+          </ul>
+          <span className='arrow'>
+            &rArr;
+          </span>
+        </section>
       </section>
     )
   }
