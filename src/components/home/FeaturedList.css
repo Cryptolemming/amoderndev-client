@@ -12,7 +12,6 @@
 .featured-list {
   display: inline-flex;
   justify-content: center;
-  border: 1px solid blue;
   overflow: hidden;
   margin: 0 auto;
   width: 90%;
@@ -26,7 +25,6 @@
 
 .horizontal-container {
   display: flex;
-  border: 1px solid red;
   justify-content: center;
 }
 
@@ -40,4 +38,39 @@
 
 .arrow:hover {
   font-weight: bold;
+}
+
+.fadeout-featured {
+  position: relative;
+  height: 200px;
+  z-index: 1;
+  width: 25px;
+}
+
+.ff-left {
+    left: 25px;
+    background: linear-gradient(
+        to left,
+        rgba(248,248,255, 0) 0%,
+        rgba(248,248,255, 1) 100%
+    );
+    background-image: linear-gradient(
+        to left,
+        rgba(248,248,255, 0) 0%,
+        rgba(248,248,255, 1) 100%
+    );
+}
+
+.ff-right {
+  right: 25px;
+  background: linear-gradient(
+      to right,
+      rgba(248,248,255, 0) 0%,
+      rgba(248,248,255, 1) 100%
+  );
+  background-image: linear-gradient(
+      to right,
+      rgba(248,248,255, 0) 0%,
+      rgba(248,248,255, 1) 100%
+  );
 }

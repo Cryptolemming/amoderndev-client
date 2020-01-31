@@ -15,9 +15,13 @@ export default class FeaturedList extends Component {
           <span className='arrow'>
             &lArr;
           </span>
+          <div className='fadeout-featured ff-left'>
+          </div>
           <ul className='featured-list'>
             {list}
           </ul>
+          <div className='fadeout-featured ff-right'>
+          </div>
           <span className='arrow'>
             &rArr;
           </span>
