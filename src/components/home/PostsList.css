@@ -1,24 +1,26 @@
 .posts-list-container {
-  border-top: .5px solid #ddd;
+  border-top: 1px solid black;
   padding: 15px 5px;
-  margin: 25px 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-content: center;
-  max-width: 1920px;
-  width: 100%;
+  justify-content: center;
+  max-width: 1600px;
+  width: 95%;
 }
 
 .posts-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: 1px solid red;
   padding-left: 0;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.home-list-title {
-  font-style: bold;
-  margin: 0;
+@media only screen and (min-width: 640px) {
+  .posts-list {
+    width: 85%;
+  }
 }
