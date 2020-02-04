@@ -9,8 +9,14 @@ import Follow from './follow/Follow';
 import Activity from './activity/Activity';
 import Authenticate from './authenticate/Authenticate';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions';
 
-export default class AModernDev extends Component {
+export class AModernDev extends Component {
+
+  componentDidMount() {
+    this.props.dispatch(fetchPosts())
+  }
 
   render() {
 
@@ -68,3 +74,5 @@ export default class AModernDev extends Component {
   }
 
 }
+
+export default connect()(AModernDev)
