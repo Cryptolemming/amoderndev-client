@@ -5,10 +5,10 @@ import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
 
 const icons = {
-  'kp': <i class="fas fa-bullseye"></i>,
-  'f': <i class="fas fa-heart"></i>,
-  'b': <i class="fas fa-bookmark"></i>,
-  'c': <i class="fas fa-comment"></i>
+  'kp': <i className="fas fa-bullseye"></i>,
+  'f': <i className="fas fa-heart"></i>,
+  'b': <i className="fas fa-bookmark"></i>,
+  'c': <i className="fas fa-comment"></i>
 }
 
 export class Post extends Component {
