@@ -1,7 +1,10 @@
+::-webkit-scrollbar {
+  width: 0px;
+}
+
 .featured-list-container {
   border-top: 1px solid black;
-  padding: 15px 0
-  ;
+  padding: 15px 0;
   margin: 25px 0;
   max-width: 1600px;
   width: 95%;
@@ -13,10 +16,11 @@
 .featured-list {
   display: inline-flex;
   justify-content: center;
-  overflow: hidden;
   margin: 0 auto;
   width: 85%;
   max-width: 1600px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .home-list-title {
