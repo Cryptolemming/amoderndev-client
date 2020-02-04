@@ -41,7 +41,7 @@ export class Post extends Component {
             {this.generateControlsJSX()}
           </ul>
         </section>
-        <p className='post-content'>{content+content+content+content+content}</p>
+        <p className='post-content'>{content+content+content+content+content+content+content}</p>
       </article>
     )
   }
