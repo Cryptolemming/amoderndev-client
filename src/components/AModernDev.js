@@ -5,6 +5,7 @@ import Home from './home/Home';
 import AccountDashboard from './account-dashboard/AccountDashboard';
 import Post from './post/Post';
 import Topics from './topics/Topics';
+import Topic from './topics/Topic';
 import Follow from './follow/Follow';
 import Activity from './activity/Activity';
 import Authenticate from './authenticate/Authenticate';
@@ -49,6 +50,12 @@ export class AModernDev extends Component {
               exact
               path='/topics'
               component={Topics}
+            />
+
+            <Route
+              exact
+              path='/topics/:topic'
+              component={Topic}
             />
 
             <Route

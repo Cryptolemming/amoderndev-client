@@ -6,6 +6,7 @@ export default class PostsList extends Component {
 
   render() {
 
+
     const list = this.generateList();
 
     return (

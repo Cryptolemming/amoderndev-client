@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Topics.css';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export class Topics extends Component {
 
@@ -17,9 +18,11 @@ export class Topics extends Component {
 
   generateTopicsJSX = () => {
     return Object.entries(this.props.topics).map(([id, topic]) => {
-      return <div key={topic.id} className='topic'>
-        {topic.title}
-      </div>
+      return <Link key={topic.id} to={`/topics/${topic.title}`}>
+        <div key={topic.id} className='topic'>
+          {topic.title}
+        </div>
+      </Link>
     })
   }
 }
