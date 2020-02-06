@@ -10,12 +10,13 @@ import Activity from './activity/Activity';
 import Authenticate from './authenticate/Authenticate';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../actions';
+import { fetchPosts, fetchTopics } from '../actions';
 
 export class AModernDev extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchPosts())
+    this.props.dispatch(fetchTopics())
   }
 
   render() {

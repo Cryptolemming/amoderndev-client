@@ -2,6 +2,7 @@ import * as ACTIONS from '../actions';
 
 const initialState = {
   posts: {},
+  topics: {},
   comments: {},
   user: false
 }
@@ -14,6 +15,12 @@ export default (state = initialState, action) => {
         return acc;
       }, {})
       return Object.assign({}, state, { posts })
+    case ACTIONS.FETCH_TOPICS_SUCCESS:
+      const topics = action.topics.reduce((acc, topic) => {
+        acc[topic.id] = topic;
+        return acc;
+      }, {})
+      return Object.assign({}, state, { topics })
     case ACTIONS.REGISTER_USER_SUCCESS:
       const { user } = action;
       return Object.assign({}, state, { user })

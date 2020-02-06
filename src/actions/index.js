@@ -30,6 +30,18 @@ export const registerUserSuccess = user => ({
   user
 })
 
+export const FETCH_TOPICS_SUCCESS = 'FETCH_TOPICS_SUCCESS';
+export const fetchTopicsSuccess = topics => ({
+  type: FETCH_TOPICS_SUCCESS,
+  topics
+})
+
+export const FETCH_TOPICS_ERROR = 'FETCH_TOPICS_ERROR';
+export const fetchTopicsError = err => ({
+  type: FETCH_TOPICS_ERROR,
+  err
+})
+
 export const registerUser = () => (dispatch, user) => {
   return fetch('localhost:8000/users', {
       type: 'POST',
@@ -92,5 +104,23 @@ export const fetchPosts = () => (dispatch) => {
     .catch(err => {
       console.log(err)
       dispatch(fetchPostsError(err))
+    })
+}
+
+export const fetchTopics = () => (dispatch) => {
+  return fetch('http://localhost:8000/api/topics')
+    .then(res => {
+      if (!res.ok) {
+        throw 'Could not fetch'
+      }
+
+      return res.json()
+    })
+    .then(topics => {
+      dispatch(fetchTopicsSuccess(topics))
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch(fetchTopicsError(err))
     })
 }
