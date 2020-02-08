@@ -26,6 +26,10 @@ export default class AccountDashboard extends Component {
       push('/authenticate/login')
     }
 
+    if (!this.context.user) {
+
+    }
+
     const user = this.context.user;
     const navJSX = this.generateNavJSX();
     const infoJSX = this.generateInfoJSX();
