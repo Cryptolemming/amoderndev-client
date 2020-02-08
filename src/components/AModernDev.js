@@ -36,7 +36,7 @@ export class AModernDev extends Component {
 
             <Route
               exact
-              path='/users/:userId'
+              path='/dashboard'
               component={AccountDashboard}
             />
 

@@ -1,23 +1,23 @@
 header {
   height: 50px;
-  background: black;
-  color: #F8F8FF;
+  background: #fff;
+  color: black;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: center;
   padding: 5px 10px;
   font-family: 'Helvetica';
+  border-bottom: 1px solid #ddd;
 }
 
 header a {
-  color: #F8F8FF;
+  color: black;
 }
 
 .auth-nav {
   width: 180px;
   display: flex;
-  justify-content: space-between;
   height: 50px;
 }
 
