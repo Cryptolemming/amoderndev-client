@@ -6,7 +6,7 @@ export default props => {
   const { user } = props;
 
   return user
-  ? <Link to={`/users/${user.id}`}>
+  ? <Link to={`/dashboard`}>
       <span className='account-icon'>account</span>
     </Link>
   : <ul className='credentials-list'>

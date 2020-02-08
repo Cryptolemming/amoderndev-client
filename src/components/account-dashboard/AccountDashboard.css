@@ -1,0 +1,43 @@
+.account-dashboard {
+  height: 100vh;
+  display: flex;
+}
+
+.account-dashboard-nav {
+  height: 100%;
+  width: 25%;
+  min-width: 250px;
+  background: white;
+  color: black;
+  border-right: .5px solid #ddd;
+  padding: 40px 15px 15px;
+  text-align: center;
+}
+
+.account-dashboard-nav p {
+  padding: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.account-dashboard-info {
+  height: 100%;
+  width: 75%;
+  padding: 40px 15px 15px;
+  text-align: center;
+}
+
+.account-dashboard-info p {
+  padding: 5px;
+  font-size: 24px;
+}
+
+.active {
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+
+.account-dashboard-nav p:hover {
+  text-decoration: underline;
+  text-decoration-color: red;
+}

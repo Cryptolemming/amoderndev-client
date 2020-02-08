@@ -48,7 +48,7 @@
   border-radius: 15px;
   position: relative;
   background: black;
-  color: #F8F8FF;
+  color: #fff;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -58,9 +58,9 @@
 }
 
 .post-topic-img {
-  background: #F8F8FF;
+  background: #fff;
   border-radius: 50%;
-  border: 3px solid #F8F8FF;
+  border: 3px solid #fff;
   width: 35px;
   height: 28px;
   position: absolute;
@@ -85,7 +85,7 @@
 }
 
 .post-controls {
-  background: #F8F8FF;
+  background: #fff;
   position: sticky;
   top: 0;
   width: 100%;

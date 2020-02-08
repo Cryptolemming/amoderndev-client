@@ -51,7 +51,7 @@ export class Form extends Component {
     dispatch(onSubmit(inputs))
       .then(user => {
         console.log(user)
-        push(`/`)
+        push(`/dashboard`)
       })
   }
 
