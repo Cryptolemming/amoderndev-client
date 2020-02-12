@@ -6,7 +6,7 @@ export default class AccountDashboardTipping extends Component {
   render() {
     return (
       <section className='account-dashboard-tipping'>
-        Account Dashboard Tipping
+        Coming soon
       </section>
     )
   }
