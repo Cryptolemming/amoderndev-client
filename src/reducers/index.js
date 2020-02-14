@@ -4,6 +4,7 @@ const initialState = {
   posts: {},
   topics: {},
   comments: {},
+  loading: false,
   user: false
 }
 
@@ -26,6 +27,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { user })
     case ACTIONS.LOGIN_USER_SUCCESS:
       return Object.assign({}, state, { user: action.user })
+    case ACTIONS.FETCH_USER_LOADING:
+      return Object.assign({}, state, { loading: true})
+    case ACTIONS.FETCH_USER_SUCCESS:
+      return Object.assign({}, state, { loading: false, user: action.user })
     default:
       return state;
   }

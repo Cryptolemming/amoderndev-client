@@ -30,6 +30,18 @@ export const registerUserSuccess = user => ({
   user
 })
 
+export const FETCH_USER_LOADING = 'FETCH_USER_LOADING';
+export const fetchUserLoading = token => ({
+  type: FETCH_USER_LOADING,
+  token
+})
+
+export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+export const fetchUserSuccess = user => ({
+  type: FETCH_USER_SUCCESS,
+  user
+})
+
 export const FETCH_TOPICS_SUCCESS = 'FETCH_TOPICS_SUCCESS';
 export const fetchTopicsSuccess = topics => ({
   type: FETCH_TOPICS_SUCCESS,
@@ -90,6 +102,8 @@ export const loginUser = (user) => (dispatch) => {
 }
 
 export const fetchUserFromToken = (token, history) => (dispatch) => {
+  dispatch(fetchUserLoading);
+
   return fetch('http://localhost:8000/users', {
     headers: {
       'Authorization': `bearer ${token}`
@@ -103,7 +117,7 @@ export const fetchUserFromToken = (token, history) => (dispatch) => {
     return res.json()
   })
   .then(user => {
-    dispatch(loginUserSuccess(user))
+    dispatch(fetchUserSuccess(user))
   })
   .catch(err => {
     console.log(err)

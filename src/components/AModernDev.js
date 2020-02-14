@@ -13,8 +13,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPosts, fetchTopics, fetchUserFromToken } from '../actions';
 import { removeJWTToken } from '../helpers/auth';
-
-
+import PrivateRoute from './private-route/PrivateRoute'
 
 export class AModernDev extends Component {
 
@@ -37,11 +36,9 @@ export class AModernDev extends Component {
               component={Home}
             />
 
-            <Route
-              exact
-              path='/dashboard'
-              component={AccountDashboard}
-            />
+            <PrivateRoute path='/dashboard'>
+              <AccountDashboard />
+            </PrivateRoute>
 
             <Route
               exact

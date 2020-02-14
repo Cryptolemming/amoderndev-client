@@ -1,3 +1,22 @@
-.activity {
-  border: 1px solid red;
+.account-dashboard {
+  height: 100vh;
+  display: flex;
+}
+
+.account-dashboard-nav {
+  height: 100%;
+  width: 25%;
+  min-width: 250px;
+  background: white;
+  color: black;
+  border-right: .5px solid #ddd;
+  padding: 40px 15px 15px;
+  text-align: center;
+}
+
+.account-dashboard-info {
+  height: 100%;
+  width: 75%;
+  padding: 40px 15px 15px;
+  text-align: center;
 }

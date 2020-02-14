@@ -21,4 +21,12 @@ export default class Activity extends Component {
       </section>
     )
   }
+
+  generateNavJSX = () => {
+    return <p>nav</p>
+  }
+
+  generateInfoJSX = user => {
+    return <p>info</p>
+  }
 }
