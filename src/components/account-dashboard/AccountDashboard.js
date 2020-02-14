@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './AccountDashboard.css';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import uuid from 'uuid/v4';
 import AccountDashboardProfile from './AccountDashboardProfile';
 import AccountDashboardAccount from './AccountDashboardAccount';
 import AccountDashboardTipping from './AccountDashboardTipping';
+import { connect } from 'react-redux';
+import { fetchUserFromToken } from '../../actions';
 
-export default class AccountDashboard extends Component {
+export class AccountDashboard extends Component {
 
   state = {
     selected: 'Profile'
@@ -18,17 +20,24 @@ export default class AccountDashboard extends Component {
     })
   }
 
-  render() {
-    const { push } = this.props;
-    const userId = window.localStorage.getItem('token')
+  componentDidMount() {
+    const { user, push, dispatch } = this.props;
+    const token = window.localStorage.getItem('token')
 
-    if (!userId) {
+    if (!token) {
       push('/authenticate/login')
     }
 
-    const user = this.context.user;
+    if (!user) {
+      dispatch(fetchUserFromToken(token, this.props.history))
+    }
+  }
+
+  render() {
+    const { user } = this.props;
+
     const navJSX = this.generateNavJSX();
-    const infoJSX = this.generateInfoJSX();
+    const infoJSX = this.generateInfoJSX(user);
 
     return (
       <section className='account-dashboard'>
@@ -56,13 +65,19 @@ export default class AccountDashboard extends Component {
     })
   }
 
-  generateInfoJSX = () => {
+  generateInfoJSX = user => {
     const navMap = {
-      'Profile': <AccountDashboardProfile />,
-      'Account': <AccountDashboardAccount />,
-      'Tipping': <AccountDashboardTipping />
+      'Profile': <AccountDashboardProfile user={user} />,
+      'Account': <AccountDashboardAccount user={user} />,
+      'Tipping': <AccountDashboardTipping user={user} />
     }
 
     return navMap[this.state.selected];
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(withRouter(AccountDashboard))
