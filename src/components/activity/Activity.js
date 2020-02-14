@@ -3,12 +3,6 @@ import './Activity.css';
 
 export default class Activity extends Component {
 
-  static defaultProps = {
-    match: {
-      params: {}
-    }
-  }
-
   render() {
 
     return (
