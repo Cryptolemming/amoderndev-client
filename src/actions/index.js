@@ -1,4 +1,4 @@
-import { handleJWTToken } from '../helpers/auth';
+import { handleJWTToken, removeJWTToken } from '../helpers/auth';
 
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 export const fetchPostsSuccess = posts => ({
@@ -89,6 +89,29 @@ export const loginUser = (user) => (dispatch) => {
     .catch(err => console.log(err))
 }
 
+export const fetchUserFromToken = (token, history) => (dispatch) => {
+  return fetch('http://localhost:8000/users', {
+    headers: {
+      'Authorization': `bearer ${token}`
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw 'Unable to fetch the user'
+    }
+
+    return res.json()
+  })
+  .then(user => {
+    dispatch(loginUserSuccess(user))
+  })
+  .catch(err => {
+    console.log(err)
+    removeJWTToken()
+    history.push('/authenticate/login')
+  })
+}
+
 export const fetchPosts = () => (dispatch) => {
   return fetch('http://localhost:8000/api/posts')
     .then(res => {
@@ -104,6 +127,7 @@ export const fetchPosts = () => (dispatch) => {
     .catch(err => {
       console.log(err)
       dispatch(fetchPostsError(err))
+
     })
 }
 

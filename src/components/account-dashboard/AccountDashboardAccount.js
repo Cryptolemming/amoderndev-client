@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './AccountDashboardAccount.css';
 import { connect } from 'react-redux';
 
-export class AccountDashboardAccount extends Component {
+export default class AccountDashboardAccount extends Component {
 
   render() {
 
@@ -21,9 +21,3 @@ export class AccountDashboardAccount extends Component {
   }
 
 }
-
-const mapStateToProps = state => ({
-  user: state.user
-})
-
-export default connect(mapStateToProps)(AccountDashboardAccount);

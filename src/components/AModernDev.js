@@ -9,9 +9,12 @@ import Topic from './topics/Topic';
 import Follow from './follow/Follow';
 import Activity from './activity/Activity';
 import Authenticate from './authenticate/Authenticate';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchTopics } from '../actions';
+import { fetchPosts, fetchTopics, fetchUserFromToken } from '../actions';
+import { removeJWTToken } from '../helpers/auth';
+
+
 
 export class AModernDev extends Component {
 
