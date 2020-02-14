@@ -6,9 +6,6 @@ export default class AccountDashboardProfile extends Component {
   render() {
     return (
       <section className='account-dashboard-profile'>
-<<<<<<< HEAD
-        Account Dashboard Profile
-=======
         <ul className='account-profile-list'>
           <li>
             <span className='account-profile-type'>picture:</span>
@@ -23,7 +20,6 @@ export default class AccountDashboardProfile extends Component {
             <p className='account-profile-signature'>this is a signature</p>
           </li>
         </ul>
->>>>>>> cdace397c2411700fe06ebb7ab1e260a6dfa7129
       </section>
     )
   }
