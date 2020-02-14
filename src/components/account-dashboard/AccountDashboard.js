@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import './AccountDashboard.css';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import uuid from 'uuid/v4';
 import AccountDashboardProfile from './AccountDashboardProfile';
 import AccountDashboardAccount from './AccountDashboardAccount';
 import AccountDashboardTipping from './AccountDashboardTipping';
 import { connect } from 'react-redux';
-import { fetchUserFromToken } from '../../actions';
 
 export class AccountDashboard extends Component {
 
@@ -18,19 +17,6 @@ export class AccountDashboard extends Component {
     this.setState({
       selected: e.currentTarget.textContent
     })
-  }
-
-  componentDidMount() {
-    const { user, push, dispatch } = this.props;
-    const token = window.localStorage.getItem('token')
-
-    if (!token) {
-      push('/authenticate/login')
-    }
-
-    if (!user) {
-      dispatch(fetchUserFromToken(token, this.props.history))
-    }
   }
 
   render() {
@@ -80,4 +66,4 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-export default connect(mapStateToProps)(withRouter(AccountDashboard))
+export default connect(mapStateToProps)(AccountDashboard)
