@@ -6,6 +6,10 @@ import ActivityPostItem from './ActivityPostItem';
 
 export class ActivityPosts extends Component {
 
+  handleDelete = () => {
+    // fetch delete post
+  }
+
   render() {
     const { user, posts } = this.props;
 
@@ -23,7 +27,10 @@ export class ActivityPosts extends Component {
 
   generatePostsJSX = posts => {
     return posts.map(post => {
-      return <ActivityPostItem key={post[1].id} {...post[1]} />
+      return <ActivityPostItem
+        handleDelete={this.handleDelete}
+        key={post[1].id}
+      {...post[1]} />
     })
   }
 

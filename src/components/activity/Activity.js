@@ -31,6 +31,9 @@ export class Activity extends Component {
           {navJSX}
         </section>
         <section className='activity-info'>
+          <Link to='/new-post'>
+            <p className='new-post-link'>New Post</p>
+          </Link>
           {infoJSX}
         </section>
       </section>

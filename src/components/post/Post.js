@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
 import { postControlIcons } from '../../constants';
+import { getTimePassed } from '../../helpers';
 
 export class Post extends Component {
 
@@ -19,7 +20,7 @@ export class Post extends Component {
       topics: []
     }
 
-    const date = Math.floor((Date.now() - new Date(date_created)) / 86400000)
+    const date = getTimePassed(date_created)
     const topicJSX = this.generateTopicsJSX(topics)
 
     return (

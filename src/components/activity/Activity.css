@@ -1,4 +1,4 @@
-.activity{
+.activity {
   height: 100vh;
   display: flex;
 }
@@ -35,4 +35,23 @@
 .activity-nav p:hover {
   text-decoration: underline;
   text-decoration-color: red;
+}
+
+.new-post-link {
+  background: black;
+  color: white;
+  font-size: 24px;
+  padding: 5px 25px;
+  margin: 0 auto 50px;
+  width: 65%;
+}
+
+.new-post-link:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 800px) {
+  .new-post-link: {
+    width: 85%;
+  }
 }
