@@ -65,11 +65,9 @@ export class AModernDev extends Component {
                 component={Follow}
               />
 
-              <Route
-                exact
-                path='/activity'
-                component={Activity}
-              />
+              <PrivateRoute path='/activity'>
+                <Activity />
+              </PrivateRoute>
 
               <Route
                 exact

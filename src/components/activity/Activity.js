@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import './Activity.css';
+import { Link } from 'react-router-dom';
+import uuid from 'uuid/v4';
+import { connect } from 'react-redux';
+import ActivityPosts from './ActivityPosts';
+import ActivityComments from './ActivityComments';
+import ActivityFavorites from './ActivityFavorites';
 
-export default class Activity extends Component {
+export class Activity extends Component {
+
+  state = {
+    selected: 'Posts'
+  }
+
+  handleChangeSelected = e => {
+    this.setState({
+      selected: e.currentTarget.textContent
+    })
+  }
 
   render() {
-
     const { user } = this.props;
 
     const navJSX = this.generateNavJSX();
@@ -23,10 +38,26 @@ export default class Activity extends Component {
   }
 
   generateNavJSX = () => {
-    return <p>nav</p>
+    const { selected } = this.state;
+    return ['Posts', 'Comments', 'Favorites'].map(datum => {
+      const active = selected === datum ? ' active': '';
+
+      return <p
+        key={uuid()}
+        className={`dashboard-nav-text${active}`}
+        onClick={this.handleChangeSelected}>
+        {datum}
+      </p>
+    })
   }
 
   generateInfoJSX = user => {
-    return <p>info</p>
+    return <ActivityPosts user={user} />
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+})
+
+export default connect(mapStateToProps)(Activity)

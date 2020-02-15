@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PostItem from './PostItem';
 import './PostsList.css';
+import PostItem from './PostItem';
 
 export default class PostsList extends Component {
 

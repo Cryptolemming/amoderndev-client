@@ -3,13 +3,7 @@ import './Post.css';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
-
-const icons = {
-  'kp': <i className="fas fa-bullseye"></i>,
-  'f': <i className="fas fa-heart"></i>,
-  'b': <i className="fas fa-bookmark"></i>,
-  'c': <i className="fas fa-comment"></i>
-}
+import { postControlIcons } from '../../constants';
 
 export class Post extends Component {
 
@@ -68,7 +62,7 @@ export class Post extends Component {
       return <li
         key={uuid()}
         className='post-controls-list-item'>
-        <span className='post-controls-text-item'>{icons[control]}</span>
+        <span className='post-controls-text-item'>{postControlIcons[control]}</span>
       </li>
     })
   }

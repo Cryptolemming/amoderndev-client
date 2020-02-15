@@ -1,9 +1,9 @@
-.account-dashboard {
+.activity{
   height: 100vh;
   display: flex;
 }
 
-.account-dashboard-nav {
+.activity-nav {
   height: 100%;
   width: 25%;
   min-width: 250px;
@@ -14,9 +14,25 @@
   text-align: center;
 }
 
-.account-dashboard-info {
+.activity-nav p {
+  padding: 5px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.activity-info {
   height: 100%;
   width: 75%;
   padding: 40px 15px 15px;
   text-align: center;
+}
+
+.active {
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+
+.activity-nav p:hover {
+  text-decoration: underline;
+  text-decoration-color: red;
 }
