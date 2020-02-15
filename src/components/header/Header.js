@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import navLinks from '../../constants/nav-links';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
 import AccountIcon from './AccountIcon';
+import { logoutUser } from '../../actions';
 
 export class Header extends Component {
+
+  onClickLogout = () => {
+    const { dispatch } = this.props;
+    dispatch(logoutUser())
+    this.props.history.push('/')
+  }
 
   render() {
 
     const user = this.props.user;
-    const navLinksJSX = this.generateNavLinks();
+    const navLinksJSX = this.generateNavLinks(user);
 
     return (
       <header>
@@ -28,14 +35,31 @@ export class Header extends Component {
     )
   }
 
-  generateNavLinks = () => {
-    return navLinks.map(link => {
+  generateNavLinks = user => {
+    let navLinksJSX = navLinks.map(link => {
       return (
         <li key={uuid()} className='nav-links-item'>
           <Link to={`/${link}`}>{link}</Link>
         </li>
       )
     })
+
+    if (user) {
+      navLinksJSX.push(this.addLogout(user))
+    }
+
+    return navLinksJSX;
+  }
+
+  addLogout = user => {
+    return user
+      ? <li
+        className='nav-links-item'
+        onClick={this.onClickLogout}
+        key={uuid()}>
+          logout
+      </li>
+      : '';
   }
 
 }
@@ -44,4 +68,4 @@ const mapStateToProps = state => ({
   user: state.user
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps)(withRouter(Header));

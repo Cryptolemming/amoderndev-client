@@ -43,6 +43,7 @@ h1 {
   display: inline;
   margin: 0 5px;
   border: 0;
+  cursor: pointer;
 }
 
 .nav-links-item:hover {

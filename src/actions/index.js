@@ -24,6 +24,11 @@ export const loginUserError = err => ({
   err
 })
 
+export const LOGOUT_USER_SUCCESS = 'LOGOUT_USER_SUCCESS';
+export const logoutUserSuccess = () => ({
+  type: LOGOUT_USER_SUCCESS,
+})
+
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const registerUserSuccess = user => ({
   type: REGISTER_USER_SUCCESS,
@@ -93,12 +98,17 @@ export const loginUser = (user) => (dispatch) => {
     })
     .then(authData => {
       const { user, authToken: token } = authData;
-
+      console.log(user, token)
       dispatch(loginUserSuccess(user))
       handleJWTToken(token)
       return user;
     })
     .catch(err => console.log(err))
+}
+
+export const logoutUser = () => dispatch => {
+  removeJWTToken();
+  dispatch(logoutUserSuccess());
 }
 
 export const fetchUserFromToken = (token, history) => (dispatch) => {

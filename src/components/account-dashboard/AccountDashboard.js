@@ -21,7 +21,7 @@ export class AccountDashboard extends Component {
 
   render() {
     const { user } = this.props;
-
+    console.log(user)
     const navJSX = this.generateNavJSX();
     const infoJSX = this.generateInfoJSX(user);
 

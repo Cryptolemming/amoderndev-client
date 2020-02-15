@@ -7,24 +7,31 @@ import Loading from '../loading/Loading';
 
 export class PrivateRoute extends Component {
 
+  componentDidMount() {
+    const { user } = this.props;
+    const token = window.localStorage.getItem('token')
+
+    if (!token) {
+      this.props.history.push('/authenticate/login')
+      return;
+    }
+
+    if (!user) {
+      this.fetchUser(token)
+    }
+  }
+
   fetchUser = token => {
     const { dispatch, history } = this.props;
     dispatch(fetchUserFromToken(token, history))
-    return <Loading />
   }
 
   render() {
 
-    const { path, user, push, loading, children } = this.props;
-    const token = window.localStorage.getItem('token')
-
-    if (!token) {
-      push('/authenticate/login')
-    }
+    const { user, loading, path, children } = this.props;
 
     return (
       <Route
-        exact
         to={path}
         render={() => {
           return (
@@ -32,7 +39,7 @@ export class PrivateRoute extends Component {
             ? <Loading />
             : user
                 ? children
-                : this.fetchUser(token)
+                : <Loading />
           )
         }}
       />

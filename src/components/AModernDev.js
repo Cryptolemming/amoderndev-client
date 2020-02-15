@@ -9,7 +9,7 @@ import Topic from './topics/Topic';
 import Follow from './follow/Follow';
 import Activity from './activity/Activity';
 import Authenticate from './authenticate/Authenticate';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPosts, fetchTopics, fetchUserFromToken } from '../actions';
 import { removeJWTToken } from '../helpers/auth';
@@ -29,53 +29,55 @@ export class AModernDev extends Component {
           <Header />
 
           <main>
+            <Switch>
 
-            <Route
-              exact
-              path='/'
-              component={Home}
-            />
+              <Route
+                exact
+                path='/'
+                component={Home}
+              />
 
-            <PrivateRoute path='/dashboard'>
-              <AccountDashboard />
-            </PrivateRoute>
+              <PrivateRoute path='/dashboard'>
+                <AccountDashboard />
+              </PrivateRoute>
 
-            <Route
-              exact
-              path='/posts/:postId'
-              component={Post}
-            />
+              <Route
+                exact
+                path='/posts/:postId'
+                component={Post}
+              />
 
-            <Route
-              exact
-              path='/topics'
-              component={Topics}
-            />
+              <Route
+                exact
+                path='/topics'
+                component={Topics}
+              />
 
-            <Route
-              exact
-              path='/topics/:topic'
-              component={Topic}
-            />
+              <Route
+                exact
+                path='/topics/:topic'
+                component={Topic}
+              />
 
-            <Route
-              exact
-              path='/follow'
-              component={Follow}
-            />
+              <Route
+                exact
+                path='/follow'
+                component={Follow}
+              />
 
-            <Route
-              exact
-              path='/activity'
-              component={Activity}
-            />
+              <Route
+                exact
+                path='/activity'
+                component={Activity}
+              />
 
-            <Route
-              exact
-              path='/authenticate/:auth_type'
-              component={Authenticate}
-            />
+              <Route
+                exact
+                path='/authenticate/:auth_type'
+                component={Authenticate}
+              />
 
+            </Switch>
           </main>
         </>
     );
