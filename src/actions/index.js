@@ -1,4 +1,4 @@
-import { handleJWTToken, removeJWTToken } from '../helpers/auth';
+import { handleJWTToken, removeJWTToken, getJWTToken} from '../helpers/auth';
 
 export const FETCH_POSTS_SUCCESS = 'FETCH_POSTS_SUCCESS';
 export const fetchPostsSuccess = posts => ({
@@ -57,6 +57,12 @@ export const FETCH_TOPICS_ERROR = 'FETCH_TOPICS_ERROR';
 export const fetchTopicsError = err => ({
   type: FETCH_TOPICS_ERROR,
   err
+})
+
+export const DELETE_POST_SUCCESS = 'DELETE_POST_SUCCESS';
+export const deletePostSuccess = postId => ({
+  type: DELETE_POST_SUCCESS,
+  postId
 })
 
 export const registerUser = () => (dispatch, user) => {
@@ -153,6 +159,28 @@ export const fetchPosts = () => (dispatch) => {
       dispatch(fetchPostsError(err))
 
     })
+}
+
+export const deletePost = (postId, history) => (dispatch) => {
+  return fetch(`http://localhost:8000/api/posts/${postId}`, {
+    type: 'DELETE',
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw 'Could not delete post'
+    }
+    return;
+  })
+  .then(() => {
+    dispatch(deletePostSuccess(postId))
+    history.push('/activity')
+  })
+  .catch(err => {
+    console.log(err)
+  })
 }
 
 export const fetchTopics = () => (dispatch) => {

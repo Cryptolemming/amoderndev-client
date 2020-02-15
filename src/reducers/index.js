@@ -16,6 +16,10 @@ export default (state = initialState, action) => {
         return acc;
       }, {})
       return Object.assign({}, state, { posts })
+    case ACTIONS.DELETE_POST_SUCCESS:
+      const postsToDeleteFrom = Object.assign({}, state.posts)
+      delete postsToDeleteFrom[action.postId]
+      return Object.assign({}, state, { posts: postsToDeleteFrom })
     case ACTIONS.FETCH_TOPICS_SUCCESS:
       const topics = action.topics.reduce((acc, topic) => {
         acc[topic.id] = topic;

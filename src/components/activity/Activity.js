@@ -55,7 +55,13 @@ export class Activity extends Component {
   }
 
   generateInfoJSX = user => {
-    return <ActivityPosts user={user} />
+    const navMap = {
+      'Posts': <ActivityPosts user={user} />,
+      'Comments': <ActivityComments user={user} />,
+      'Favorites': <ActivityFavorites user={user} />
+    }
+
+    return navMap[this.state.selected];
   }
 }
 

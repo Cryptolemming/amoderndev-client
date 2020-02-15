@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default ({id, user, date_created, title, content, comments, handleDelete}) => {
   const date = getTimePassed(date_created)
-
+  console.log(id)
   const controls = ['c', 'f'].map(control => {
     return <span
       key={uuid()}
@@ -19,7 +19,7 @@ export default ({id, user, date_created, title, content, comments, handleDelete}
   const mods = ['d', 'e'].map(mod => {
     const actions = {
       'd': {
-        onClick: handleDelete
+        onClick: () => handleDelete(id)
       },
       'e': {}
     }

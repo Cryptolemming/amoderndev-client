@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './ActivityPosts.css';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import ActivityPostItem from './ActivityPostItem';
+import { deletePost } from '../../actions';
 
 export class ActivityPosts extends Component {
 
-  handleDelete = () => {
-    // fetch delete post
+  handleDelete = postId => {
+    const { dispatch, history } = this.props;
+    dispatch(deletePost(postId, history))
   }
 
   render() {
@@ -40,4 +42,4 @@ const mapStateToProps = state => ({
   posts: state.posts,
 })
 
-export default connect(mapStateToProps)(ActivityPosts)
+export default connect(mapStateToProps)(withRouter(ActivityPosts))
