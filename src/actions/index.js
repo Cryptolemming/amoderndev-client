@@ -65,6 +65,12 @@ export const deletePostSuccess = postId => ({
   postId
 })
 
+export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
+export const deleteCommentSuccess = (postId, commentId) => ({
+  type: DELETE_COMMENT_SUCCESS,
+  info: {postId, commentId}
+})
+
 export const registerUser = () => (dispatch, user) => {
   return fetch('localhost:8000/users', {
       type: 'POST',
@@ -177,6 +183,30 @@ export const deletePost = (postId, history) => (dispatch) => {
   .then(() => {
     dispatch(deletePostSuccess(postId))
     history.push('/activity')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+
+export const deleteComment = (postId, commentId, history) => (dispatch) => {
+  return fetch(`http://localhost:8000/api/comments/${postId}`, {
+    type: 'DELETE',
+    body: {
+      comment_id: commentId
+    },
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw 'Could not delete comment'
+    }
+    return;
+  })
+  .then(() => {
+    dispatch(deleteCommentSuccess(postId, commentId))
   })
   .catch(err => {
     console.log(err)

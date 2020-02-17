@@ -1,0 +1,64 @@
+.activity-comment-item {
+  border: .5px solid #ddd;
+  width: 100%;
+  height: 80px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  display: flex;
+}
+
+.activity-comment {
+  width: 80%;
+  border: .5px solid #ddd;
+}
+
+.activity-comment:hover {
+  border: .5px solid #aaa;
+}
+
+.activity-comment-content {
+  width: 100%;
+  text-align: center;
+  font-size: 1em;
+  height: 60px;
+  padding: 15px 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity-comment-date {
+  font-size: 12px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  font-style: italic;
+  color: red;
+  margin: 0;
+}
+
+.activity-comment-controls {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.activity-comment-control-item {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  width: 50%;
+  border: .5px solid #ddd;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.activity-comment-control-item:hover {
+  border: .5px solid #aaa;
+}
