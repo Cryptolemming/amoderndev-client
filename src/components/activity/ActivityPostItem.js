@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 export default ({id, user, date_created, title, content, comments, handleDelete}) => {
   const date = getTimePassed(date_created)
-  console.log(id)
+
   const controls = ['c', 'f'].map(control => {
     return <span
       key={uuid()}
@@ -24,22 +24,23 @@ export default ({id, user, date_created, title, content, comments, handleDelete}
       'e': {}
     }
 
+    const content = mod === 'd'
+      ? postControlIcons[mod]
+      : <Link
+          key={uuid()}
+          to='/edit-post'
+        >
+          {postControlIcons[mod]}
+        </Link>
+
     const span = <span
                   key={uuid()}
                   className='activity-post-control-item'
                   {...actions[mod]}>
-                  {postControlIcons[mod]}
+                  {content}
                 </span>
 
-    return mod === 'd'
-      ? span
-      : <Link
-          key={uuid()}
-          className='activity-post-control-item'
-          to='/edit-post'
-        >
-          {span}
-        </Link>
+    return span;
   })
 
   return (
