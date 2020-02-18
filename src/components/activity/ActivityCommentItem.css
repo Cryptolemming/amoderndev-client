@@ -8,7 +8,7 @@
 }
 
 .activity-comment {
-  width: 80%;
+  width: 90%;
   border: .5px solid #ddd;
 }
 
@@ -19,13 +19,10 @@
 .activity-comment-content {
   width: 100%;
   text-align: center;
-  font-size: 1em;
-  height: 60px;
-  padding: 15px 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border: 1px solid blue;
+  font-weight: normal;
+  font-style: italic;
+  font-size: 14px;
 }
 
 .activity-comment-date {
@@ -35,11 +32,11 @@
   text-align: center;
   font-style: italic;
   color: red;
-  margin: 0;
+  padding: 15px 0 0;
 }
 
 .activity-comment-controls {
-  width: 20%;
+  width: 10%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -50,7 +47,7 @@
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  width: 50%;
+  width: 100%;
   border: .5px solid #ddd;
   height: 50%;
   display: flex;

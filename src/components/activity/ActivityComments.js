@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './ActivityComments.css';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import ActivityCommentItem from './ActivityPostItem';
+import ActivityCommentItem from './ActivityCommentItem';
 import { deleteComment } from '../../actions';
 
 export class ActivityComments extends Component {
@@ -27,9 +27,8 @@ export class ActivityComments extends Component {
 
   generateCommentsJSX = () => {
     const { user, comments } = this.props;
-    console.log(user)
+
     return Object.entries(comments).reduce((acc, [id, comment]) => {
-      console.log(comment.user, user.id)
       if (comment.user === user.id) {
         return <ActivityCommentItem
                   handleDelete={this.handleDelete}
@@ -43,7 +42,7 @@ export class ActivityComments extends Component {
 }
 
 const mapStateToProps = state => ({
-  comments: state.userComments
+  comments: state.commentsByUser
 })
 
 export default connect(mapStateToProps)(withRouter(ActivityComments))
