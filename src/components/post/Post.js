@@ -5,6 +5,7 @@ import uuid from 'uuid/v4';
 import { Link } from 'react-router-dom';
 import { postControlIcons } from '../../constants';
 import { getTimePassed } from '../../helpers';
+import Comments from '../comments/Comments';
 
 export class Post extends Component {
 
@@ -24,20 +25,23 @@ export class Post extends Component {
     const topicJSX = this.generateTopicsJSX(topics)
 
     return (
-      <article className='post'>
-        <h3 className='post-title'>{title}</h3>
-        <span className='post-user'>{user}</span>
-        <time className='post-date'>{date} days ago</time>
-        <ul className='post-topic-list'>
-          {topicJSX}
-        </ul>
-        <section className='post-controls'>
-          <ul className='post-controls-list'>
-            {this.generateControlsJSX()}
+      <>
+        <article className='post'>
+          <h3 className='post-title'>{title}</h3>
+          <span className='post-user'>{user}</span>
+          <time className='post-date'>{date} days ago</time>
+          <ul className='post-topic-list'>
+            {topicJSX}
           </ul>
-        </section>
-        <p className='post-content'>{content+content+content+content+content+content+content}</p>
-      </article>
+          <section className='post-controls'>
+            <ul className='post-controls-list'>
+              {this.generateControlsJSX()}
+            </ul>
+          </section>
+          <p className='post-content'>{content+content+content+content+content+content+content}</p>
+        </article>
+        <Comments postId={postId} />
+      </>
     )
   }
 

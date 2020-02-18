@@ -65,6 +65,18 @@ export const deletePostSuccess = postId => ({
   postId
 })
 
+export const FETCH_COMMENTS_SUCCESS = 'FETCH_COMMENTS_SUCCESS';
+export const fetchCommentsSuccess = comments => ({
+  type: FETCH_COMMENTS_SUCCESS,
+  comments
+})
+
+export const FETCH_COMMENTS_ERROR = 'FETCH_COMMENTS_ERROR';
+export const fetchCommentsError = err => ({
+  type: FETCH_COMMENTS_ERROR,
+  err
+})
+
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
 export const deleteCommentSuccess = (postId, commentId) => ({
   type: DELETE_COMMENT_SUCCESS,
@@ -152,7 +164,7 @@ export const fetchPosts = () => (dispatch) => {
   return fetch('http://localhost:8000/api/posts')
     .then(res => {
       if (!res.ok) {
-        throw 'Could not fetch'
+        throw 'Could not fetch posts'
       }
 
       return res.json()
@@ -187,6 +199,24 @@ export const deletePost = (postId, history) => (dispatch) => {
   .catch(err => {
     console.log(err)
   })
+}
+
+export const fetchComments = postId => (dispatch) => {
+  return fetch(`http://localhost:8000/api/comments/${postId}`)
+    .then(res => {
+      if (!res.ok) {
+        throw 'Could not fetch comments'
+      }
+
+      return res.json()
+    })
+    .then(comments => {
+      dispatch(fetchCommentsSuccess(comments))
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch(fetchCommentsError(err))
+    })
 }
 
 export const deleteComment = (postId, commentId, history) => (dispatch) => {

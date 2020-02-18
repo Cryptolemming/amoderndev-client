@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { fetchPosts, fetchTopics, fetchUserFromToken } from '../actions';
 import { removeJWTToken } from '../helpers/auth';
 import PrivateRoute from './private-route/PrivateRoute'
+import PublicRoute from './public-route/PublicRoute'
 
 export class AModernDev extends Component {
 
@@ -31,41 +32,31 @@ export class AModernDev extends Component {
           <main>
             <Switch>
 
-              <Route
-                exact
-                path='/'
-                component={Home}
-              />
+              <PublicRoute exact path='/'>
+                <Home />
+              </PublicRoute>
 
-              <PrivateRoute path='/dashboard'>
+              <PrivateRoute exact path='/dashboard'>
                 <AccountDashboard />
               </PrivateRoute>
 
-              <Route
-                exact
-                path='/posts/:postId'
-                component={Post}
-              />
+              <PublicRoute exact path='/posts/:postId'>
+                <Post />
+              </PublicRoute>
 
-              <Route
-                exact
-                path='/topics'
-                component={Topics}
-              />
+              <PublicRoute exact path='/topics'>
+                <Topics />
+              </PublicRoute>
 
-              <Route
-                exact
-                path='/topics/:topic'
-                component={Topic}
-              />
+              <PublicRoute exact path='/topics/topic'>
+                <Topic />
+              </PublicRoute>
 
-              <Route
-                exact
-                path='/follow'
-                component={Follow}
-              />
+              <PrivateRoute exact path='/follow'>
+                <Follow />
+              </PrivateRoute>
 
-              <PrivateRoute path='/activity'>
+              <PrivateRoute exact path='/activity'>
                 <Activity />
               </PrivateRoute>
 
