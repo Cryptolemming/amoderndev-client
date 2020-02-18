@@ -4,6 +4,7 @@ const initialState = {
   posts: {},
   topics: {},
   comments: {},
+  commentsByUser: {},
   loading: false,
   user: false
 }
@@ -16,6 +17,12 @@ export default (state = initialState, action) => {
         return acc;
       }, {})
       return Object.assign({}, state, { posts })
+    case ACTIONS.FETCH_COMMENTS_BY_USER_SUCCESS:
+      const commentsByUser = action.comments.reduce((acc, comment) => {
+        acc[comment.id] = comment;
+        return acc;
+      }, {})
+      return Object.assign({}, state, { commentsByUser })
     case ACTIONS.DELETE_POST_SUCCESS:
       const postsToDeleteFrom = Object.assign({}, state.posts)
       delete postsToDeleteFrom[action.postId]

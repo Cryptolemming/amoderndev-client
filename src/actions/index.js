@@ -77,6 +77,18 @@ export const fetchCommentsError = err => ({
   err
 })
 
+export const FETCH_COMMENTS_BY_USER_SUCCESS = 'FETCH_COMMENTS_BY_USER_SUCCESS';
+export const fetchCommentsByUserSuccess = comments => ({
+  type: FETCH_COMMENTS_BY_USER_SUCCESS,
+  comments
+})
+
+export const FETCH_COMMENTS_BY_USER_ERROR = 'FETCH_COMMENTS_BY_USER_ERROR';
+export const fetchCommentsByUserError = err => ({
+  type: FETCH_COMMENTS_BY_USER_ERROR,
+  err
+})
+
 export const DELETE_COMMENT_SUCCESS = 'DELETE_COMMENT_SUCCESS';
 export const deleteCommentSuccess = (postId, commentId) => ({
   type: DELETE_COMMENT_SUCCESS,
@@ -219,7 +231,27 @@ export const fetchComments = postId => (dispatch) => {
     })
 }
 
-// fetch comments by user
+export const fetchCommentsByUser = userId => (dispatch) => {
+  return fetch(`http://localhost:8000/api/comments/user/${userId}`, {
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`
+    }
+  })
+    .then(res => {
+      if (!res.ok) {
+        throw 'Could not fetch comments'
+      }
+
+      return res.json()
+    })
+    .then(comments => {
+      dispatch(fetchCommentsByUserSuccess(comments))
+    })
+    .catch(err => {
+      console.log(err)
+      dispatch(fetchCommentsByUserError(err))
+    })
+}
 
 export const deleteComment = (postId, commentId, history) => (dispatch) => {
   return fetch(`http://localhost:8000/api/comments/${postId}`, {

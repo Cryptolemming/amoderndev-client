@@ -11,9 +11,9 @@ import { fetchCommentsByUser } from '../../actions';
 export class Activity extends Component {
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, user } = this.props;
 
-    dispatch(fetchCommentsByUser())
+    dispatch(fetchCommentsByUser(user.id))
   }
 
   state = {
