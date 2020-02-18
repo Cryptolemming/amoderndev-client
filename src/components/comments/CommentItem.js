@@ -7,8 +7,10 @@ export default ({id, user, post, content, date_created}) => {
 
   return (
     <li className='comment-item'>
-      <p className='comment-user'>
-        by {user} {date}
+      <p className='comment-details'>
+        by
+        <span className='comment-username'>{user}</span>
+        <span className='comment-date'>{date}</span>
       </p>
       <p className='comment-content'>
         {content}

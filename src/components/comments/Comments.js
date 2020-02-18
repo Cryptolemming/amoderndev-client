@@ -32,7 +32,8 @@ export class Comments extends Component {
   generateCommentsJSX = () => {
     const { comments } = this.props;
 
-    return Object.entries(comments).map((id, comment) => {
+    return Object.entries(comments).map(([id, comment]) => {
+      console.log(comment)
       return <CommentItem
               key={id}
               {...comment}
