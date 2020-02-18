@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Post.css';
 import { connect } from 'react-redux';
 import uuid from 'uuid/v4';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { postControlIcons } from '../../constants';
 import { getTimePassed } from '../../helpers';
 import Comments from '../comments/Comments';
@@ -11,8 +11,8 @@ export class Post extends Component {
 
   render() {
 
-    const { postId } = this.props.match.params;
-
+    const postId = this.props.location.pathname.split('/')[2];
+    console.log(postId)
     const { title, user, date_created, content, topics } = this.props.posts[postId] || {
       title: '',
       user: '',
@@ -77,4 +77,4 @@ const mapStateToProps = state => ({
   posts: state.posts
 })
 
-export default connect(mapStateToProps)(Post)
+export default connect(mapStateToProps)(withRouter(Post))
