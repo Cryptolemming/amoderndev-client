@@ -6,8 +6,15 @@ import { connect } from 'react-redux';
 import ActivityPosts from './ActivityPosts';
 import ActivityComments from './ActivityComments';
 import ActivityFavorites from './ActivityFavorites';
+import { fetchCommentsByUser } from '../../actions';
 
 export class Activity extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    dispatch(fetchCommentsByUser())
+  }
 
   state = {
     selected: 'Posts'
@@ -31,13 +38,21 @@ export class Activity extends Component {
           {navJSX}
         </section>
         <section className='activity-info'>
-          <Link to='/new-post'>
-            <p className='new-post-link'>New Post</p>
-          </Link>
+          {this.generateNewPostJSX()}
           {infoJSX}
         </section>
       </section>
     )
+  }
+
+  generateNewPostJSX = () => {
+    const { selected } = this.state;
+
+    return selected === 'Posts'
+      ? <Link to='/new-post'>
+          <p className='new-post-link'>New Post</p>
+        </Link>
+      : '';
   }
 
   generateNavJSX = () => {

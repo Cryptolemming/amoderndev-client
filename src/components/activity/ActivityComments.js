@@ -13,10 +13,8 @@ export class ActivityComments extends Component {
   }
 
   render() {
-    const { user, comments } = this.props;
 
-    const commentsEntries = Object.entries(this.props.comments).filter(([id, comment]) => comment.user === user.username)
-    const commentsJSX = this.generateCommentsJSX(commentsEntries)
+    const commentsJSX = this.generateCommentsJSX()
 
     return (
       <section className='activity-comments'>
@@ -27,19 +25,25 @@ export class ActivityComments extends Component {
     )
   }
 
-  generateCommentsJSX =comments => {
-    return comments.map(comment => {
-      return <ActivityCommentItem
-        handleDelete={this.handleDelete}
-        key={comment[1].id}
-      {...comment[1]} />
-    })
+  generateCommentsJSX = () => {
+    const { user, comments } = this.props;
+    console.log(user)
+    return Object.entries(comments).reduce((acc, [id, comment]) => {
+      console.log(comment.user, user.id)
+      if (comment.user === user.id) {
+        return <ActivityCommentItem
+                  handleDelete={this.handleDelete}
+                  key={id}
+                  {...comment}
+                />
+      }
+    }, [])
   }
 
 }
 
 const mapStateToProps = state => ({
-  comments: state.comments
+  comments: state.userComments
 })
 
 export default connect(mapStateToProps)(withRouter(ActivityComments))

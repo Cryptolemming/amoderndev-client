@@ -40,6 +40,7 @@ export class Post extends Component {
           </section>
           <p className='post-content'>{content+content+content+content+content+content+content}</p>
         </article>
+        <div className='post-comment-separator'></div>
         <Comments postId={postId} />
       </>
     )

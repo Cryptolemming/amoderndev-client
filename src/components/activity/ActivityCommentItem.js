@@ -20,15 +20,11 @@ export default ({id, user, post, date_created, content, handleDelete}) => {
     return <span
               key={uuid()}
               className='activity-post-control-item'
-              {...actions[mod]}>
-              <Link
-                  key={uuid()}
-                  to='/edit-post'
-                >
-                  {postControlIcons['d']}
-                  </Link>
+              onClick={this.handleDelete(post, id)}
+            >
+              {postControlIcons['d']}
             </span>
-  })
+  }
 
   return (
       <li className='activity-comment-item'>
