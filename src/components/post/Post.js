@@ -29,7 +29,7 @@ export class Post extends Component {
         <article className='post'>
           <h3 className='post-title'>{title}</h3>
           <span className='post-user'>{user}</span>
-          <time className='post-date'>{date} days ago</time>
+          <time className='post-date'>{date}</time>
           <ul className='post-topic-list'>
             {topicJSX}
           </ul>
