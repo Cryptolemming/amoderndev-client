@@ -9,6 +9,7 @@ import Topic from './topics/Topic';
 import Follow from './follow/Follow';
 import Activity from './activity/Activity';
 import Authenticate from './authenticate/Authenticate';
+import NewPost from './post/NewPost';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchPosts, fetchTopics, fetchUserFromToken } from '../actions';
@@ -58,6 +59,10 @@ export class AModernDev extends Component {
 
               <PrivateRoute exact path='/activity'>
                 <Activity />
+              </PrivateRoute>
+
+              <PrivateRoute exact path='/new-post'>
+                <NewPost />
               </PrivateRoute>
 
               <Route

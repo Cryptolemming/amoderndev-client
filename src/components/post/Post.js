@@ -9,13 +9,19 @@ import Comments from '../comments/Comments';
 
 export class Post extends Component {
 
+  postRef = React.createRef();
   commentRef = React.createRef();
 
   focusComments = () => {
-    console.log(this.commentRef)
     this.commentRef.scrollIntoView({
       behavior: "smooth"
     });
+  }
+
+  focusPost = () => {
+    this.postRef.scrollIntoView({
+      behavior: "smooth"
+    })
   }
 
   render() {
@@ -34,7 +40,10 @@ export class Post extends Component {
 
     return (
       <>
-        <article className='post'>
+        <span onClick={this.focusPost} className='post-top-return'>
+          <i className="fas fa-chevron-up"></i>
+        </span>
+        <article ref={article => this.postRef = article} className='post'>
           <h3 className='post-title'>{title}</h3>
           <span className='post-user'>{user}</span>
           <time className='post-date'>{date}</time>

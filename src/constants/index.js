@@ -8,7 +8,8 @@ const postControlIcons = {
   'b': <i className="fas fa-bookmark"></i>,
   'c': <i className="fas fa-comment"></i>,
   'd': <i className="fas fa-trash-alt"></i>,
-  'e': <i className="fas fa-edit"></i>
+  'e': <i className="fas fa-edit"></i>,
+  'u': <i className="fas fa-chevron-up"></i>
 }
 
 export {

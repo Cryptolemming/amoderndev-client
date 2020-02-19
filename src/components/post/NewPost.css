@@ -1,0 +1,9 @@
+.new-post {
+  margin: 25px auto;
+  width: 75%;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+  border: 1px solid red;
+}

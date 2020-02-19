@@ -117,6 +117,19 @@
   cursor: pointer;
 }
 
+.post-top-return {
+  position: fixed;
+  bottom: 25px;
+  left: 10%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.post-top-return:hover {
+  opacity: .8;
+}
+
 .post-controls-list-item:hover {
   opacity: .8;
 }

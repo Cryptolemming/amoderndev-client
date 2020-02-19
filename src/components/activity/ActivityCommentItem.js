@@ -17,7 +17,7 @@ export default ({id, user, post, username, date_created, content, handleDelete})
   const mods = <span
               key={uuid()}
               className='activity-comment-control-item'
-              onClick={handleDelete(post, id)}
+              onClick={() => handleDelete(post, id)}
             >
               {postControlIcons['d']}
             </span>
