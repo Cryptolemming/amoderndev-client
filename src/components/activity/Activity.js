@@ -31,7 +31,7 @@ export class Activity extends Component {
 
     const navJSX = this.generateNavJSX();
     const infoJSX = this.generateInfoJSX(user);
-    console.log(this.state.selected)
+
     return (
       <section className='activity'>
         <section className='activity-nav'>

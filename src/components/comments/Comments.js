@@ -16,7 +16,6 @@ export class Comments extends Component {
   }
 
   render() {
-
     const commentsJSX = this.generateCommentsJSX();
 
     return (

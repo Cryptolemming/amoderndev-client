@@ -255,7 +255,7 @@ export const fetchCommentsByUser = userId => (dispatch) => {
 
 export const deleteComment = (postId, commentId, history) => (dispatch) => {
   return fetch(`http://localhost:8000/api/comments/${postId}`, {
-    type: 'DELETE',
+    method: 'DELETE',
     body: {
       comment_id: commentId
     },
