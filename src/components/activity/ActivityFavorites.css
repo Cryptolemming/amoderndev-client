@@ -1,0 +1,35 @@
+.activity-favorites {
+  margin: 0 15px;
+  padding: 0 25%;
+}
+
+.activity-favorites-list {
+  width: 100%;
+}
+
+.activity-favorites-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.activity-favorites-button {
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 0;
+  background: white;
+}
+
+.activity-favorites-button:hover {
+  background: #efefef;
+}
+
+.activity-button-selected {
+  background: black;
+  color: white;
+}
+
+.activity-button-selected:hover {
+  background: black;
+}
