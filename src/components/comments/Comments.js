@@ -6,15 +6,6 @@ import CommentItem from './CommentItem';
 
 export class Comments extends Component {
 
-  static defaultProps = {
-    comments: []
-  }
-
-  componentDidMount() {
-    const { dispatch, postId } = this.props;
-    dispatch(fetchComments(postId))
-  }
-
   render() {
     const commentsJSX = this.generateCommentsJSX();
 
@@ -29,13 +20,12 @@ export class Comments extends Component {
   }
 
   generateCommentsJSX = () => {
-    const { comments } = this.props;
+    const { comments, comment_ids } = this.props;
 
-    return Object.entries(comments).map(([id, comment]) => {
-      console.log(comment)
+    return comment_ids.map(id => {
       return <CommentItem
               key={id}
-              {...comment}
+              {...comments[id]}
             />
     })
   }
@@ -43,7 +33,7 @@ export class Comments extends Component {
 }
 
 const mapStateToProps = state => ({
-  comments: state.comments || []
+  comments: state.comments
 })
 
 export default connect(mapStateToProps)(Comments);

@@ -27,12 +27,13 @@ export class Post extends Component {
   render() {
     const postId = this.props.location.pathname.split('/')[2];
 
-    const { title, user, date_created, content, topics } = this.props.posts[postId] || {
+    const { title, user, date_created, content, topics, comments } = this.props.posts[postId] || {
       title: '',
       user: '',
       date_created: 0,
       content: '',
-      topics: []
+      topics: [],
+      comments: [],
     }
 
     const date = getTimePassed(date_created)
@@ -58,7 +59,7 @@ export class Post extends Component {
           <p className='post-content'>{content+content+content+content+content+content+content}</p>
         </article>
         <div ref={div => this.commentRef = div} className='post-comment-separator'></div>
-        <Comments postId={postId} />
+        <Comments  comment_ids={comments} />
       </>
     )
   }
