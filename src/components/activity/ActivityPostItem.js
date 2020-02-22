@@ -5,14 +5,21 @@ import uuid from 'uuid/v4';
 import { getTimePassed } from '../../helpers';
 import { Link } from 'react-router-dom';
 
-export default ({id, user, date_created, title, content, comments, handleDelete}) => {
+export default ({id, user, date_created, title, content, handleDelete, comments, favourites}) => {
   const date = getTimePassed(date_created)
+  const counts = {
+    'c': comments.length,
+    'f': favourites.length
+  }
 
   const controls = ['c', 'f'].map(control => {
     return <span
       key={uuid()}
       className='activity-post-control-item'>
-      {postControlIcons[control]}
+      <span className='activity-post-control-text-item'>
+        <span className='activity-control-count'>{counts[control]}</span>
+        {postControlIcons[control]}
+      </span>
     </span>
   })
 
