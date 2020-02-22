@@ -27,18 +27,19 @@ export class Post extends Component {
   render() {
     const postId = this.props.location.pathname.split('/')[2];
 
-    const { title, user, date_created, content, topics, comments } = this.props.posts[postId] || {
+    const { title, user, date_created, content, topics, favourites, comments } = this.props.posts[postId] || {
       title: '',
       user: '',
       date_created: 0,
       content: '',
       topics: [],
       comments: [],
+      favourites: []
     }
 
     const date = getTimePassed(date_created)
     const topicJSX = this.generateTopicsJSX(topics)
-
+    console.log(favourites.length, comments.length)
     return (
       <>
         <span onClick={this.focusPost} className='post-top-return'>

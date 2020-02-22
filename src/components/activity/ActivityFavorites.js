@@ -17,7 +17,7 @@ export class ActivityFavorites extends Component {
   }
 
   render() {
-
+    console.log(this.props.posts)
     const favoritesJSX = this.generateFavoritesJSX();
 
     return (
