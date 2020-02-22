@@ -95,6 +95,12 @@ export const deleteCommentSuccess = (postId, commentId) => ({
   info: {postId, commentId}
 })
 
+export const FETCH_FAVOURITES_SUCCESS = 'FETCH_FAVOURITES_SUCCESS';
+export const fetchFavouritesSuccess = favourites => ({
+  type: FETCH_FAVOURITES_SUCCESS,
+  favourites
+})
+
 export const registerUser = () => (dispatch, user) => {
   return fetch('localhost:8000/users', {
       type: 'POST',
@@ -117,7 +123,7 @@ export const registerUser = () => (dispatch, user) => {
     .catch(err => dispatch(loginUserError))
 }
 
-export const loginUser = (user) => (dispatch) => {
+export const loginUser = (user) => dispatch => {
   return fetch('http://localhost:8000/auth/login', {
       method: 'POST',
       body: JSON.stringify(user),
@@ -147,7 +153,7 @@ export const logoutUser = () => dispatch => {
   dispatch(logoutUserSuccess());
 }
 
-export const fetchUserFromToken = (token, history) => (dispatch) => {
+export const fetchUserFromToken = (token, history) => dispatch => {
   dispatch(fetchUserLoading);
 
   return fetch('http://localhost:8000/users', {
@@ -172,7 +178,7 @@ export const fetchUserFromToken = (token, history) => (dispatch) => {
   })
 }
 
-export const fetchPosts = () => (dispatch) => {
+export const fetchPosts = () => dispatch => {
   return fetch('http://localhost:8000/api/posts')
     .then(res => {
       if (!res.ok) {
@@ -191,7 +197,7 @@ export const fetchPosts = () => (dispatch) => {
     })
 }
 
-export const deletePost = (postId, history) => (dispatch) => {
+export const deletePost = (postId, history) => dispatch => {
   return fetch(`http://localhost:8000/api/posts/${postId}`, {
     type: 'DELETE',
     headers: {
@@ -213,8 +219,8 @@ export const deletePost = (postId, history) => (dispatch) => {
   })
 }
 
-export const fetchComments = postId => (dispatch) => {
-  return fetch(`http://localhost:8000/api/comments/${postId}`)
+export const fetchComments = () => dispatch => {
+  return fetch(`http://localhost:8000/api/comments/`)
     .then(res => {
       if (!res.ok) {
         throw 'Could not fetch comments'
@@ -231,8 +237,8 @@ export const fetchComments = postId => (dispatch) => {
     })
 }
 
-export const fetchCommentsByUser = userId => (dispatch) => {
-  return fetch(`http://localhost:8000/api/comments/user/${userId}`, {
+export const fetchCommentsByUser = () => dispatch => {
+  return fetch(`http://localhost:8000/api/comments/user`, {
     headers: {
       'Authorization': `bearer ${getJWTToken()}`
     }
@@ -253,7 +259,7 @@ export const fetchCommentsByUser = userId => (dispatch) => {
     })
 }
 
-export const deleteComment = (postId, commentId, history) => (dispatch) => {
+export const deleteComment = (postId, commentId, history) => dispatch => {
   return fetch(`http://localhost:8000/api/comments/${postId}`, {
     method: 'DELETE',
     body: {
@@ -277,7 +283,26 @@ export const deleteComment = (postId, commentId, history) => (dispatch) => {
   })
 }
 
-export const fetchTopics = () => (dispatch) => {
+export const fetchFavouritesByUser = () => dispatch => {
+  return fetch(`http://localhost:8000/api/favourites`, {
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`
+    }
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw 'Could not fetch favourites'
+    }
+    return res.json()
+  })
+  .then(favourites => {
+    console.log(favourites)
+    dispatch(fetchFavouritesSuccess(favourites))
+  })
+  .catch(err => console.log(err))
+}
+
+export const fetchTopics = () => dispatch => {
   return fetch('http://localhost:8000/api/topics')
     .then(res => {
       if (!res.ok) {

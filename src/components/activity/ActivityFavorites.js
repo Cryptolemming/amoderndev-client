@@ -47,15 +47,15 @@ export class ActivityFavorites extends Component {
   }
 
   generateFavoritesJSX = () => {
-    const { posts, comments } = this.props;
+    const { posts, comments, favouritesByUser } = this.props;
     const { selected } = this.state;
 
     return selected === 'posts'
-      ? Object.entries(posts).map(([id, post]) => {
-        return <ActivityPostItem key={post.id} {...post}/>
+      ? favouritesByUser.posts.map(postId => {
+        return <ActivityPostItem key={postId} {...posts[postId]}/>
       })
-      : Object.entries(comments).map(([id, comment]) => {
-        return <ActivityCommentItem key={comment.id} {...comment} />
+      : favouritesByUser.comments.map(commentId => {
+        return <ActivityCommentItem key={commentId} {...comments[commentId]} />
       })
 
   }
@@ -64,7 +64,8 @@ export class ActivityFavorites extends Component {
 
 const mapStateToProps = state  => ({
   posts: state.posts,
-  comments: state.comments
+  comments: state.comments,
+  favouritesByUser: state.favouritesByUser
 })
 
 export default connect(mapStateToProps)(ActivityFavorites)

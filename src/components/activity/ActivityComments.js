@@ -29,6 +29,7 @@ export class ActivityComments extends Component {
     const { user, comments } = this.props;
 
     return Object.entries(comments).reduce((acc, [id, comment]) => {
+      console.log(comment.user, user.id)
       if (comment.user === user.id) {
         return <ActivityCommentItem
                   handleDelete={this.handleDelete}

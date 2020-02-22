@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import ActivityPosts from './ActivityPosts';
 import ActivityComments from './ActivityComments';
 import ActivityFavorites from './ActivityFavorites';
-import { fetchCommentsByUser } from '../../actions';
+import { fetchCommentsByUser, fetchFavouritesByUser } from '../../actions';
 
 export class Activity extends Component {
 
@@ -14,6 +14,7 @@ export class Activity extends Component {
     const { dispatch, user } = this.props;
 
     dispatch(fetchCommentsByUser(user.id))
+    dispatch(fetchFavouritesByUser())
   }
 
   state = {

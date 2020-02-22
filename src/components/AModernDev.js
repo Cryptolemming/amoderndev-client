@@ -12,7 +12,7 @@ import Authenticate from './authenticate/Authenticate';
 import NewPost from './post/NewPost';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchPosts, fetchTopics, fetchUserFromToken } from '../actions';
+import { fetchPosts, fetchTopics, fetchUserFromToken, fetchComments } from '../actions';
 import { removeJWTToken } from '../helpers/auth';
 import PrivateRoute from './private-route/PrivateRoute'
 import PublicRoute from './public-route/PublicRoute'
@@ -21,6 +21,7 @@ export class AModernDev extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchPosts())
+    this.props.dispatch(fetchComments())
     this.props.dispatch(fetchTopics())
   }
 

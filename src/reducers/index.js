@@ -5,6 +5,7 @@ const initialState = {
   topics: {},
   comments: {},
   commentsByUser: {},
+  favoritesByUser: {},
   loading: false,
   user: false
 }
@@ -17,12 +18,6 @@ export default (state = initialState, action) => {
         return acc;
       }, {})
       return Object.assign({}, state, { posts })
-    case ACTIONS.FETCH_COMMENTS_BY_USER_SUCCESS:
-      const commentsByUser = action.comments.reduce((acc, comment) => {
-        acc[comment.id] = comment;
-        return acc;
-      }, {})
-      return Object.assign({}, state, { commentsByUser })
     case ACTIONS.DELETE_POST_SUCCESS:
       const postsToDeleteFrom = Object.assign({}, state.posts)
       delete postsToDeleteFrom[action.postId]
@@ -33,6 +28,15 @@ export default (state = initialState, action) => {
         return acc;
       }, {})
       return Object.assign({}, state, { comments })
+    case ACTIONS.FETCH_COMMENTS_BY_USER_SUCCESS:
+      const commentsByUser = action.comments.reduce((acc, comment) => {
+        acc[comment.id] = comment;
+        return acc;
+      }, {})
+      return Object.assign({}, state, { commentsByUser })
+    case ACTIONS.FETCH_FAVOURITES_SUCCESS:
+      console.log(action.favourites)
+      return Object.assign({}, state, { favouritesByUser: action.favourites })
     case ACTIONS.DELETE_COMMENT_SUCCESS:
       const commentsToDeleteFrom = Object.assign({}, state.comments)
       delete commentsToDeleteFrom[action.info.postId][action.info.commentId]
