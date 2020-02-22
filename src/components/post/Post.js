@@ -36,10 +36,13 @@ export class Post extends Component {
       comments: [],
       favourites: []
     }
-
-    const date = getTimePassed(date_created)
-    const topicJSX = this.generateTopicsJSX(topics)
     console.log(favourites.length, comments.length)
+    const date = getTimePassed(date_created)
+    const commentCounts = comments.length;
+    const favouriteCounts = favourites.length;
+    const topicJSX = this.generateTopicsJSX(topics)
+    const controlsJSX = this.generateControlsJSX(favourites.length, comments.length)
+
     return (
       <>
         <span onClick={this.focusPost} className='post-top-return'>
@@ -54,7 +57,7 @@ export class Post extends Component {
           </ul>
           <section className='post-controls'>
             <ul className='post-controls-list'>
-              {this.generateControlsJSX()}
+              {controlsJSX}
             </ul>
           </section>
           <p className='post-content'>{content+content+content+content+content+content+content}</p>
@@ -65,7 +68,7 @@ export class Post extends Component {
     )
   }
 
-  generateTopicsJSX = topics => {
+  generateTopicsJSX = (topics) => {
     return topics.map((topic, idx, arr) => {
       return <Link to={`/topics/${topic}`} key={uuid()}>
         <li key={uuid()} className='post-topic-list-item'>
@@ -82,7 +85,7 @@ export class Post extends Component {
     })
   }
 
-  generateControlsJSX = () => {
+  generateControlsJSX = (commentCounts, favouriteCounts) => {
     const navMap = {
       'kp': () => {},
       'f': () => {},
@@ -90,12 +93,24 @@ export class Post extends Component {
       'c': this.focusComments
     }
 
+    const counts = {
+      'f': favouriteCounts,
+      'c': commentCounts
+    }
+
     return ['kp', 'f', 'b', 'c'].map(control => {
+      const count = counts[control] !== undefined
+        ? <span className='control-count'>{counts[control]}</span>
+        : '';
+
       return <li
         key={uuid()}
         onClick={navMap[control]}
         className='post-controls-list-item'>
-        <span className='post-controls-text-item'>{postControlIcons[control]}</span>
+        <span className='post-controls-text-item'>
+          {count}
+          {postControlIcons[control]}
+        </span>
       </li>
     })
   }
