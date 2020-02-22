@@ -15,8 +15,8 @@ export default ({id, user, date_created, title, content, handleDelete, comments,
   const controls = ['c', 'f'].map(control => {
     return <span
       key={uuid()}
-      className='activity-post-control-item'>
-      <span className='activity-post-control-text-item'>
+      className='activity-control-item'>
+      <span className='activity-control-text-item'>
         <span className='activity-control-count'>{counts[control]}</span>
         {postControlIcons[control]}
       </span>
@@ -42,7 +42,7 @@ export default ({id, user, date_created, title, content, handleDelete, comments,
 
     const span = <span
                   key={uuid()}
-                  className='activity-post-control-item'
+                  className='activity-control-item'
                   {...actions[mod]}>
                   {content}
                 </span>

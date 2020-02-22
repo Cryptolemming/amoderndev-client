@@ -5,13 +5,16 @@ import { postControlIcons } from '../../constants';
 import { getTimePassed } from '../../helpers';
 import { Link } from 'react-router-dom';
 
-export default ({id, user, post, username, date_created, content, handleDelete}) => {
+export default ({id, user, post, username, date_created, content, handleDelete, favourites}) => {
   const date = getTimePassed(date_created)
 
   const controls = <span
       key={uuid()}
       className='activity-comment-control-item'>
-      {postControlIcons['f']}
+      <span className='activity-control-text-item'>
+        <span className='activity-control-count'>{favourites.length}</span>
+        {postControlIcons['f']}
+      </span>
     </span>
 
   const mods = <span
