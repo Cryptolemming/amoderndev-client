@@ -17,7 +17,7 @@ export default ({id, user, date_created, title, content, handleDelete, comments,
       key={uuid()}
       className='activity-control-item'>
       <span className='activity-control-text-item'>
-        <span className='activity-control-count'>{counts[control]}</span>
+        <span className='control-count'>{counts[control]}</span>
         {postControlIcons[control]}
       </span>
     </span>

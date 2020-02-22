@@ -27,21 +27,22 @@ export class Post extends Component {
   render() {
     const postId = this.props.location.pathname.split('/')[2];
 
-    const { title, user, date_created, content, topics, favourites, comments } = this.props.posts[postId] || {
+    const { title, user, date_created, content, topics,
+            favourites, comments, favouriteUsers = [], commentUsers = [] } = this.props.posts[postId] || {
       title: '',
       user: '',
       date_created: 0,
       content: '',
       topics: [],
       comments: [],
-      favourites: []
+      favourites: [],
+      favouriteUsers: [],
+      commentUsers: []
     }
-    console.log(favourites.length, comments.length)
+
     const date = getTimePassed(date_created)
-    const commentCounts = comments.length;
-    const favouriteCounts = favourites.length;
     const topicJSX = this.generateTopicsJSX(topics)
-    const controlsJSX = this.generateControlsJSX(favourites.length, comments.length)
+    const controlsJSX = this.generateControlsJSX(favouriteUsers, commentUsers)
 
     return (
       <>
@@ -85,7 +86,9 @@ export class Post extends Component {
     })
   }
 
-  generateControlsJSX = (commentCounts, favouriteCounts) => {
+  generateControlsJSX = (favouriteUsers, commentUsers) => {
+    const { user } = this.props;
+
     const navMap = {
       'kp': () => {},
       'f': () => {},
@@ -94,8 +97,15 @@ export class Post extends Component {
     }
 
     const counts = {
-      'f': favouriteCounts,
-      'c': commentCounts
+      'f': favouriteUsers.length,
+      'c': commentUsers.length
+    }
+
+    const activeClass = {
+      'kp': 'inactive',
+      'f': user && favouriteUsers.includes(user.id) ? 'active' : 'inactive',
+      'b': 'inactive',
+      'c': user && commentUsers.includes(user.id) ? 'active' : 'inactive'
     }
 
     return ['kp', 'f', 'b', 'c'].map(control => {
@@ -107,7 +117,7 @@ export class Post extends Component {
         key={uuid()}
         onClick={navMap[control]}
         className='post-controls-list-item'>
-        <span className='post-controls-text-item'>
+        <span className={`post-controls-text-item control-${activeClass[control]}`}>
           {count}
           {postControlIcons[control]}
         </span>
@@ -117,6 +127,7 @@ export class Post extends Component {
 }
 
 const mapStateToProps = state => ({
+  user: state.user,
   posts: state.posts
 })
 
