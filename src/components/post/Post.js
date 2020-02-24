@@ -28,21 +28,21 @@ export class Post extends Component {
     const postId = this.props.location.pathname.split('/')[2];
 
     const { title, user, date_created, content, topics,
-            favourites, comments, favouriteUsers = [], commentUsers = [] } = this.props.posts[postId] || {
+            comments, favouritesUsers = [], commentsUsers = [] } = this.props.posts[postId] || {
       title: '',
       user: '',
       date_created: 0,
       content: '',
       topics: [],
       comments: [],
-      favourites: [],
-      favouriteUsers: [],
-      commentUsers: []
+      favouritesUsers: [],
+      commenstUsers: []
     }
 
     const date = getTimePassed(date_created)
     const topicJSX = this.generateTopicsJSX(topics)
-    const controlsJSX = this.generateControlsJSX(favouriteUsers, commentUsers)
+    const controlsJSX = this.generateControlsJSX(comments.length,
+                                                favouritesUsers, commentsUsers)
 
     return (
       <>
@@ -86,7 +86,7 @@ export class Post extends Component {
     })
   }
 
-  generateControlsJSX = (favouriteUsers, commentUsers) => {
+  generateControlsJSX = (commentsCount, favouritesUsers, commentsUsers) => {
     const { user } = this.props;
 
     const navMap = {
@@ -97,15 +97,15 @@ export class Post extends Component {
     }
 
     const counts = {
-      'f': favouriteUsers.length,
-      'c': commentUsers.length
+      'f': favouritesUsers.length,
+      'c': commentsCount
     }
 
     const activeClass = {
       'kp': 'inactive',
-      'f': user && favouriteUsers.includes(user.id) ? 'active' : 'inactive',
+      'f': user && favouritesUsers.includes(user.id) ? 'active' : 'inactive',
       'b': 'inactive',
-      'c': user && commentUsers.includes(user.id) ? 'active' : 'inactive'
+      'c': user && commentsUsers.includes(user.id) ? 'active' : 'inactive'
     }
 
     return ['kp', 'f', 'b', 'c'].map(control => {
