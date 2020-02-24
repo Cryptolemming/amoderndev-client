@@ -5,14 +5,22 @@ import { postControlIcons } from '../../constants';
 import { getTimePassed } from '../../helpers';
 import { Link } from 'react-router-dom';
 
-export default ({id, user, post, username, date_created, content, handleDelete, favourites}) => {
+export default ({id, user, post, username, date_created, content,
+                handleDelete, favouritesUsers}) => {
+
   const date = getTimePassed(date_created)
+  const counts = {
+    'f': favouritesUsers.length
+  }
+  const activeClass = {
+    'f': user && favouritesUsers.includes(user.id) ? 'active' : 'inactive',
+  }
 
   const controls = <span
       key={uuid()}
       className='activity-comment-control-item'>
-      <span className='activity-control-text-item'>
-        <span className='activity-control-count'>{favourites.length}</span>
+      <span className={`post-controls-text-item control-${activeClass['f']}`}>
+        <span className='activity-control-count'>{favouritesUsers.length}</span>
         {postControlIcons['f']}
       </span>
     </span>
