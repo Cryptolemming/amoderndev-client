@@ -6,7 +6,7 @@ import { getTimePassed } from '../../helpers';
 import { Link } from 'react-router-dom';
 
 export default ({id, user, post, username, date_created, content,
-                handleDelete, favouritesUsers}) => {
+                controls, mods, handleDelete, favouritesUsers}) => {
 
   const date = getTimePassed(date_created)
   const counts = {
@@ -16,22 +16,22 @@ export default ({id, user, post, username, date_created, content,
     'f': user && favouritesUsers.includes(user.id) ? 'active' : 'inactive',
   }
 
-  const controls = <span
+  const controlsJSX = controls ? <span
       key={uuid()}
       className='activity-comment-control-item'>
       <span className={`post-controls-text-item control-${activeClass['f']}`}>
         <span className='activity-control-count'>{favouritesUsers.length}</span>
         {postControlIcons['f']}
       </span>
-    </span>
+    </span> : ''
 
-  const mods = <span
+  const modsJSX = mods ? <span
               key={uuid()}
               className='activity-comment-control-item'
               onClick={() => handleDelete(post, id)}
             >
               {postControlIcons['d']}
-            </span>
+            </span> : ''
 
   return (
       <li className='activity-comment-item'>
@@ -46,8 +46,8 @@ export default ({id, user, post, username, date_created, content,
             </Link>
         </div>
         <div className='activity-comment-controls'>
-          {controls}
-          {mods}
+          {controlsJSX}
+          {modsJSX}
         </div>
       </li>
   )

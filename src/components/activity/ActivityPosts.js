@@ -30,6 +30,8 @@ export class ActivityPosts extends Component {
   generatePostsJSX = posts => {
     return posts.map(post => {
       return <ActivityPostItem
+        controls={['c', 'f']}
+        mods={['d', 'e']}
         handleDelete={this.handleDelete}
         key={post[1].id}
       {...post[1]} />

@@ -8,8 +8,9 @@
 }
 
 .activity-post-text {
-  width: 80%;
+  width: 100%;
   border: .5px solid #ddd;
+  border-right: 0;
 }
 
 .activity-post-text:hover {
@@ -39,7 +40,7 @@
 }
 
 .activity-post-controls {
-  width: 20%;
+  width: 100px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -50,9 +51,9 @@
   text-align: center;
   font-size: 24px;
   font-weight: bold;
-  width: 50%;
+  width: 40px;
   border: .5px solid #ddd;
-  height: 50%;
+  height: 49.5px;
   display: flex;
   justify-content: center;
   align-items: center;

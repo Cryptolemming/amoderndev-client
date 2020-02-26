@@ -52,10 +52,20 @@ export class ActivityFavorites extends Component {
 
     return selected === 'posts'
       ? favouritesByUser.posts.map(postId => {
-        return <ActivityPostItem key={postId} {...posts[postId]}/>
+        return <ActivityPostItem
+          controls={['f']}
+          mods={[]}
+          key={postId}
+          {...posts[postId]}
+        />
       })
       : favouritesByUser.comments.map(commentId => {
-        return <ActivityCommentItem key={commentId} {...comments[commentId]} />
+        return <ActivityCommentItem
+          controls={true}
+          mods={false}
+          key={commentId}
+          {...comments[commentId]}
+        />
       })
 
   }

@@ -5,7 +5,7 @@ import uuid from 'uuid/v4';
 import { getTimePassed } from '../../helpers';
 import { Link } from 'react-router-dom';
 
-export default ({id, user, date_created, title, content,
+export default ({id, user, date_created, title, content, controls, mods,
                 handleDelete, comments, favouritesUsers, commentsUsers}) => {
 
   const date = getTimePassed(date_created)
@@ -19,7 +19,7 @@ export default ({id, user, date_created, title, content,
     'c': user && commentsUsers.includes(user.id) ? 'active' : 'inactive'
   }
 
-  const controls = ['c', 'f'].map(control => {
+  const controlsJSX = controls.map(control => {
     return <span
       key={uuid()}
       className='activity-control-item'>
@@ -30,7 +30,7 @@ export default ({id, user, date_created, title, content,
     </span>
   })
 
-  const mods = ['d', 'e'].map(mod => {
+  const modsJSX = mods.map(mod => {
     const actions = {
       'd': {
         onClick: () => handleDelete(id)
@@ -70,8 +70,8 @@ export default ({id, user, date_created, title, content,
             </Link>
         </div>
         <div className='activity-post-controls'>
-          {controls}
-          {mods}
+          {controlsJSX}
+          {modsJSX}
         </div>
       </li>
   )

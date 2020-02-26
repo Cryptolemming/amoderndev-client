@@ -10,6 +10,7 @@
 .activity-comment {
   width: 90%;
   border: .5px solid #ddd;
+  border-right: 0;
 }
 
 .activity-comment:hover {

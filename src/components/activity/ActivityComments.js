@@ -32,6 +32,8 @@ export class ActivityComments extends Component {
       console.log(comment.user, user.id)
       if (comment.user === user.id) {
         return <ActivityCommentItem
+                  controls={true}
+                  mods={true}
                   handleDelete={this.handleDelete}
                   key={id}
                   {...comment}
