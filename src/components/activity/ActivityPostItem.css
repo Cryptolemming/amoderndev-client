@@ -9,12 +9,10 @@
 
 .activity-post-text {
   width: 100%;
-  border: .5px solid #ddd;
-  border-right: 0;
 }
 
 .activity-post-text:hover {
-  border: .5px solid #aaa;
+
 }
 
 .activity-post-title {
