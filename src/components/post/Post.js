@@ -6,6 +6,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { postControlIcons } from '../../constants';
 import { getTimePassed } from '../../helpers';
 import Comments from '../comments/Comments';
+import { addFavourite, deleteFavourite } from '../../actions';
 
 export class Post extends Component {
 
@@ -22,6 +23,21 @@ export class Post extends Component {
     this.postRef.scrollIntoView({
       behavior: "smooth"
     })
+  }
+
+  handleClickFavourite = () => {
+    const postId = this.props.location.pathname.split('/')[2];
+    const { user, dispatch, history, posts } = this.props;
+    const favouritesUsers = posts ? posts[postId].favouritesUsers : [];
+    // if there's a user
+    if (user) {
+      favouritesUsers.includes(user.id)
+        ? dispatch(deleteFavourite('post', parseInt(postId)))
+        : dispatch(addFavourite('post', parseInt(postId)))
+    }
+    else {
+      history.push('/authenticate/login')
+    }
   }
 
   render() {
@@ -91,7 +107,7 @@ export class Post extends Component {
 
     const navMap = {
       'kp': () => {},
-      'f': () => {},
+      'f': this.handleClickFavourite,
       'b': () => {},
       'c': this.focusComments
     }

@@ -5,7 +5,7 @@ const initialState = {
   topics: {},
   comments: {},
   commentsByUser: {},
-  favoritesByUser: {},
+  favouritesByUser: {},
   loading: false,
   user: false
 }
@@ -35,8 +35,19 @@ export default (state = initialState, action) => {
       }, {})
       return Object.assign({}, state, { commentsByUser })
     case ACTIONS.FETCH_FAVOURITES_SUCCESS:
-      console.log(action.favourites)
       return Object.assign({}, state, { favouritesByUser: action.favourites })
+    case ACTIONS.ADD_FAVOURITE_SUCCESS:
+      const postsToAddFavourite = Object.assign({}, state.posts);
+      postsToAddFavourite[action.id].favouritesUsers = [...postsToAddFavourite[action.id].favouritesUsers, state.user.id]
+      return Object.assign({}, state, {
+        posts: postsToAddFavourite
+      })
+    case ACTIONS.DELETE_FAVOURITE_SUCCESS:
+      const postsToDeleteFavourite = Object.assign({}, state.posts);
+      postsToDeleteFavourite[action.id].favouritesUsers = postsToDeleteFavourite[action.id].favouritesUsers.filter(userId => userId !== state.user.id)
+      return Object.assign({}, state, {
+        posts: postsToDeleteFavourite
+      })
     case ACTIONS.DELETE_COMMENT_SUCCESS:
       const commentsToDeleteFrom = Object.assign({}, state.comments)
       delete commentsToDeleteFrom[action.info.postId][action.info.commentId]

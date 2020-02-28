@@ -101,6 +101,20 @@ export const fetchFavouritesSuccess = favourites => ({
   favourites
 })
 
+export const ADD_FAVOURITE_SUCCESS = 'ADD_FAVOURITE_SUCCESS';
+export const addFavouriteSuccess = (id, favouriteType) => ({
+  type: ADD_FAVOURITE_SUCCESS,
+  id,
+  favouriteType
+})
+
+export const DELETE_FAVOURITE_SUCCESS = 'DELETE_FAVOURITE_SUCCESS';
+export const deleteFavouriteSuccess = (favouriteType, id) => ({
+  type: DELETE_FAVOURITE_SUCCESS,
+  favouriteType,
+  id
+})
+
 export const registerUser = () => (dispatch, user) => {
   return fetch('localhost:8000/users', {
       type: 'POST',
@@ -296,8 +310,59 @@ export const fetchFavouritesByUser = () => dispatch => {
     return res.json()
   })
   .then(favourites => {
-    console.log(favourites)
     dispatch(fetchFavouritesSuccess(favourites))
+  })
+  .catch(err => console.log(err))
+}
+
+export const addFavourite = (type, id) => dispatch => {
+  return fetch(`http://localhost:8000/api/favourites/${type}`, {
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`,
+      'Content-Type': 'application/json'
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      [`${type}_id`]: id
+    })
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw 'Could not add favourite'
+    }
+    return res.json()
+  })
+  .then(favourite => {
+    dispatch(fetchFavouritesByUser())
+    .then(() => {
+      dispatch(addFavouriteSuccess(id, type))
+    })
+  })
+  .catch(err => console.log(err))
+}
+
+export const deleteFavourite = (type, id) => dispatch => {
+  return fetch(`http://localhost:8000/api/favourites/${type}`, {
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`,
+      'Content-Type': 'application/json'
+    },
+    method: 'DELETE',
+    body: JSON.stringify({
+      [`${type}_id`]: id
+    })
+  })
+  .then(res => {
+    if (!res.ok) {
+      throw 'Could not delete favourite'
+    }
+    return;
+  })
+  .then(()=> {
+    dispatch(fetchFavouritesByUser())
+      .then(() => {
+        dispatch(deleteFavouriteSuccess(type, id))
+      })
   })
   .catch(err => console.log(err))
 }
