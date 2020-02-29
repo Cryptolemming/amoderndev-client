@@ -46,7 +46,8 @@ export default (state = initialState, action) => {
       } else {
         const commentsToAddFavourite = Object.assign({}, state.comments);
         commentsToAddFavourite[action.id].favouritesUsers = [...commentsToAddFavourite[action.id].favouritesUsers, state.user.id]
-        const commentsToAddFavouriteByUser = Object.assign({}, state.commentsByUser, { [action.id]: commentsToAddFavourite[action.id]});
+        const commentsToAddFavouriteByUser = Object.assign({}, state.commentsByUser);
+        commentsToAddFavouriteByUser[action.id].favouritesUsers = commentsToAddFavourite[action.id].favouritesUsers;
         return Object.assign({}, state, {
           comments: commentsToAddFavourite,
           commentsByUser: commentsToAddFavouriteByUser
@@ -62,7 +63,8 @@ export default (state = initialState, action) => {
       } else {
         const commentsToDeleteFavourite = Object.assign({}, state.comments);
         commentsToDeleteFavourite[action.id].favouritesUsers = commentsToDeleteFavourite[action.id].favouritesUsers.filter(userId => userId !== state.user.id)
-        const commentsToDeleteFavouriteByUser = Object.assign({}, state.commentsByUser, { [action.id]: commentsToDeleteFavourite[action.id]});
+        const commentsToDeleteFavouriteByUser = Object.assign({}, state.commentsByUser);
+        commentsToDeleteFavouriteByUser[action.id].favouritesUsers = commentsToDeleteFavourite[action.id].favouritesUsers;
         return Object.assign({}, state, {
           comments: commentsToDeleteFavourite,
           commentsByUser: commentsToDeleteFavouriteByUser

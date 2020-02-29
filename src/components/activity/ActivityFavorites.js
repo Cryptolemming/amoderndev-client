@@ -49,7 +49,7 @@ export class ActivityFavorites extends Component {
   generateFavoritesJSX = () => {
     const { posts, comments, favouritesByUser } = this.props;
     const { selected } = this.state;
-
+    console.log(comments)
     return selected === 'posts'
       ? favouritesByUser.posts.map(postId => {
         return <ActivityPostItem

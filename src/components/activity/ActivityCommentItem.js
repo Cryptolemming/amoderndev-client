@@ -10,8 +10,7 @@ import { addFavourite, deleteFavourite, deleteComment } from '../../actions';
 export class ActivityCommentItem extends Component {
 
   handleClickFavourite = () => {
-    const { id: commentId, user, dispatch, history, comments } = this.props;
-    const favouritesUsers = comments ? comments[commentId].favouritesUsers : [];
+    const { id: commentId, favouritesUsers = [], user, dispatch, history, comments } = this.props;
     // if there's a user
     if (user) {
       favouritesUsers.includes(user.id)
@@ -62,7 +61,7 @@ export class ActivityCommentItem extends Component {
   }
 
   generateControlsJSX = () => {
-    const { favouritesUsers, user, controls } = this.props;
+    const { favouritesUsers = [], user, controls } = this.props;
 
     const counts = {
       'f': favouritesUsers.length
@@ -90,7 +89,6 @@ export class ActivityCommentItem extends Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  comments: state.commentsByUser
 })
 
 export default connect(mapStateToProps)(ActivityCommentItem)
