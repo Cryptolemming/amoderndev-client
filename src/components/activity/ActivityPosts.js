@@ -9,6 +9,7 @@ export class ActivityPosts extends Component {
 
   handleDelete = postId => {
     const { dispatch, history } = this.props;
+    console.log(history)
     dispatch(deletePost(postId, history))
   }
 

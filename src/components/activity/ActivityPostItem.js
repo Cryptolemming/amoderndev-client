@@ -25,11 +25,11 @@ export class ActivityPostItem extends Component {
 
   render() {
     const date = getTimePassed(date_created)
-    const { id, user, date_created, title, content, mods,
-            handleDelete, comments, favouritesUsers, commentsUsers } = this.props;
+    const { id, user, date_created, title, content,
+            comments } = this.props;
 
     const controlsJSX = this.generateControlsJSX();
-    const modsJSX = this.generateModsJSX(mods);
+    const modsJSX = this.generateModsJSX();
 
       return (
           <li className='activity-post-item'>
@@ -51,11 +51,13 @@ export class ActivityPostItem extends Component {
       )
   }
 
-  generateModsJSX = (mods, id) => {
+  generateModsJSX = () => {
+    const { handleDelete, mods, id, dispatch } = this.props;
+
     const modsJSX = mods.map(mod => {
       const actions = {
         'd': {
-          onClick: () => this.props.dispatch(deletePost(id))
+          onClick: () => dispatch(handleDelete(id))
         },
         'e': {}
       }
