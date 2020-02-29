@@ -11,10 +11,6 @@
   width: 100%;
 }
 
-.activity-post-text:hover {
-
-}
-
 .activity-post-title {
   width: 100%;
   text-align: center;
@@ -43,6 +39,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-end;
+  align-content: flex-end;
 }
 
 .activity-control-item {
