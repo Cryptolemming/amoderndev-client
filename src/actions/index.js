@@ -218,7 +218,7 @@ export const fetchPosts = () => dispatch => {
 }
 
 export const addPost = (title, topics, content, history) => dispatch => {
-  console.log(title, topics, content)
+
   return fetch(`http://localhost:8000/api/posts/`, {
     method: 'POST',
     body: JSON.stringify({

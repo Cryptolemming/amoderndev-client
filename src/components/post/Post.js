@@ -42,9 +42,9 @@ export class Post extends Component {
 
   render() {
     const postId = this.props.location.pathname.split('/')[2];
-    console.log(this.props.posts)
-    const { title, user, date_created, content, topics,
-            comments, favouritesUsers = [], commentsUsers = [] } = this.props.posts[postId] || {
+
+    const { title, user, date_created, content, topics = [],
+            comments = [], favouritesUsers = [], commentsUsers = [] } = this.props.posts[postId] || {
       title: '',
       user: '',
       date_created: 0,
