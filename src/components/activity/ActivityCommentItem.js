@@ -4,51 +4,93 @@ import uuid from 'uuid/v4';
 import { postControlIcons } from '../../constants';
 import { getTimePassed } from '../../helpers';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { addFavourite, deleteFavourite, deleteComment } from '../../actions';
 
-export default ({id, user, post, username, date_created, content,
-                controls, mods, handleDelete, favouritesUsers}) => {
+export class ActivityCommentItem extends Component {
 
-  const date = getTimePassed(date_created)
-  const counts = {
-    'f': favouritesUsers.length
+  handleClickFavourite = () => {
+    const { id: commentId, user, dispatch, history, comments } = this.props;
+    const favouritesUsers = comments ? comments[commentId].favouritesUsers : [];
+    // if there's a user
+    if (user) {
+      favouritesUsers.includes(user.id)
+        ? dispatch(deleteFavourite('comment', parseInt(commentId)))
+        : dispatch(addFavourite('comment', parseInt(commentId)))
+    }
+    else {
+      history.push('/authenticate/login')
+    }
   }
-  const activeClass = {
-    'f': user && favouritesUsers.includes(user.id) ? 'active' : 'inactive',
+
+  render() {
+    const date = getTimePassed(date_created)
+    const { id, user, username, date_created, content, mods,
+            handleDelete, favouritesUsers, post } = this.props;
+
+    const controlsJSX = this.generateControlsJSX();
+    const modsJSX = this.generateModsJSX(mods, id, post, handleDelete);
+
+    return (
+        <li className='activity-comment-item'>
+          <div className='activity-comment'>
+              <Link to={`/posts/${post}`}>
+                <p className='activity-comment-date'>
+                  {date}
+                </p>
+                <p className='activity-comment-content'>
+                  {content}
+                </p>
+              </Link>
+          </div>
+          <div className='activity-comment-controls'>
+            {controlsJSX}
+            {modsJSX}
+          </div>
+        </li>
+    )
   }
 
-  const controlsJSX = controls ? <span
-      key={uuid()}
-      className='activity-comment-control-item'>
-      <span className={`post-controls-text-item control-${activeClass['f']}`}>
-        <span className='activity-control-count'>{favouritesUsers.length}</span>
-        {postControlIcons['f']}
-      </span>
-    </span> : ''
+  generateModsJSX = (mods, id, post, handleDelete) => {
+    return mods ? <span
+                key={uuid()}
+                className='activity-comment-control-item'
+                onClick={() => handleDelete(post, id)}
+              >
+                {postControlIcons['d']}
+              </span> : '';
+  }
 
-  const modsJSX = mods ? <span
-              key={uuid()}
-              className='activity-comment-control-item'
-              onClick={() => handleDelete(post, id)}
-            >
-              {postControlIcons['d']}
-            </span> : ''
+  generateControlsJSX = () => {
+    const { favouritesUsers, user, controls } = this.props;
 
-  return (
-      <li className='activity-comment-item'>
-        <div className='activity-comment'>
-            <Link to={`/posts/${post}`}>
-              <p className='activity-comment-date'>
-                {date}
-              </p>
-              <p className='activity-comment-content'>
-                {content}
-              </p>
-            </Link>
-        </div>
-        <div className='activity-comment-controls'>
-          {controlsJSX}
-          {modsJSX}
-        </div>
-      </li>
-  )
+    const counts = {
+      'f': favouritesUsers.length
+    }
+    const activeClass = {
+      'f': user && favouritesUsers.includes(user.id) ? 'active' : 'inactive',
+    }
+
+    console.log(user.id, favouritesUsers)
+
+    const controlsJSX = controls ? <span
+        key={uuid()}
+        onClick={this.handleClickFavourite}
+        className='activity-comment-control-item'>
+        <span className={`post-controls-text-item control-${activeClass['f']}`}>
+          <span className='activity-control-count'>{favouritesUsers.length}</span>
+          {postControlIcons['f']}
+        </span>
+      </span> : ''
+
+     return controlsJSX;
+  }
+
 }
+
+const mapStateToProps = state => ({
+  user: state.user,
+  comments: state.commentsByUser
+})
+
+export default connect(mapStateToProps)(ActivityCommentItem)

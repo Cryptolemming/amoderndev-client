@@ -316,6 +316,7 @@ export const fetchFavouritesByUser = () => dispatch => {
 }
 
 export const addFavourite = (type, id) => dispatch => {
+  console.log(type, id)
   return fetch(`http://localhost:8000/api/favourites/${type}`, {
     headers: {
       'Authorization': `bearer ${getJWTToken()}`,
@@ -333,6 +334,7 @@ export const addFavourite = (type, id) => dispatch => {
     return res.json()
   })
   .then(favourite => {
+    console.log(favourite)
     dispatch(fetchFavouritesByUser())
     .then(() => {
       dispatch(addFavouriteSuccess(id, type))
@@ -342,6 +344,7 @@ export const addFavourite = (type, id) => dispatch => {
 }
 
 export const deleteFavourite = (type, id) => dispatch => {
+  console.log(type, id)
   return fetch(`http://localhost:8000/api/favourites/${type}`, {
     headers: {
       'Authorization': `bearer ${getJWTToken()}`,

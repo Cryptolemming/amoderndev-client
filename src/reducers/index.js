@@ -37,17 +37,37 @@ export default (state = initialState, action) => {
     case ACTIONS.FETCH_FAVOURITES_SUCCESS:
       return Object.assign({}, state, { favouritesByUser: action.favourites })
     case ACTIONS.ADD_FAVOURITE_SUCCESS:
-      const postsToAddFavourite = Object.assign({}, state.posts);
-      postsToAddFavourite[action.id].favouritesUsers = [...postsToAddFavourite[action.id].favouritesUsers, state.user.id]
-      return Object.assign({}, state, {
-        posts: postsToAddFavourite
-      })
+      if (action.favouriteType === 'post') {
+        const postsToAddFavourite = Object.assign({}, state.posts);
+        postsToAddFavourite[action.id].favouritesUsers = [...postsToAddFavourite[action.id].favouritesUsers, state.user.id]
+        return Object.assign({}, state, {
+          posts: postsToAddFavourite
+        })
+      } else {
+        const commentsToAddFavourite = Object.assign({}, state.comments);
+        commentsToAddFavourite[action.id].favouritesUsers = [...commentsToAddFavourite[action.id].favouritesUsers, state.user.id]
+        const commentsToAddFavouriteByUser = Object.assign({}, state.commentsByUser, { [action.id]: commentsToAddFavourite[action.id]});
+        return Object.assign({}, state, {
+          comments: commentsToAddFavourite,
+          commentsByUser: commentsToAddFavouriteByUser
+        })
+      }
     case ACTIONS.DELETE_FAVOURITE_SUCCESS:
-      const postsToDeleteFavourite = Object.assign({}, state.posts);
-      postsToDeleteFavourite[action.id].favouritesUsers = postsToDeleteFavourite[action.id].favouritesUsers.filter(userId => userId !== state.user.id)
-      return Object.assign({}, state, {
-        posts: postsToDeleteFavourite
-      })
+      if (action.favouriteType === 'post') {
+        const postsToDeleteFavourite = Object.assign({}, state.posts);
+        postsToDeleteFavourite[action.id].favouritesUsers = postsToDeleteFavourite[action.id].favouritesUsers.filter(userId => userId !== state.user.id)
+        return Object.assign({}, state, {
+          posts: postsToDeleteFavourite
+        })
+      } else {
+        const commentsToDeleteFavourite = Object.assign({}, state.comments);
+        commentsToDeleteFavourite[action.id].favouritesUsers = commentsToDeleteFavourite[action.id].favouritesUsers.filter(userId => userId !== state.user.id)
+        const commentsToDeleteFavouriteByUser = Object.assign({}, state.commentsByUser, { [action.id]: commentsToDeleteFavourite[action.id]});
+        return Object.assign({}, state, {
+          comments: commentsToDeleteFavourite,
+          commentsByUser: commentsToDeleteFavouriteByUser
+        })
+      }
     case ACTIONS.DELETE_COMMENT_SUCCESS:
       const commentsToDeleteFrom = Object.assign({}, state.comments)
       delete commentsToDeleteFrom[action.info.postId][action.info.commentId]

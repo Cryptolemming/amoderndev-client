@@ -7,10 +7,9 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addFavourite, deleteFavourite, deletePost } from '../../actions';
 
-export class PostItem extends Component {
+export class ActivityPostItem extends Component {
 
   handleClickFavourite = () => {
-    console.log('click favourite')
     const { id: postId, user, dispatch, history, posts } = this.props;
     const favouritesUsers = posts ? posts[postId].favouritesUsers : [];
     // if there's a user
@@ -26,10 +25,10 @@ export class PostItem extends Component {
 
   render() {
     const date = getTimePassed(date_created)
-    const { id, user, date_created, title, content, controls, mods,
+    const { id, user, date_created, title, content, mods,
             handleDelete, comments, favouritesUsers, commentsUsers } = this.props;
 
-    const controlsJSX = this.generateControlsJSX(controls);
+    const controlsJSX = this.generateControlsJSX();
     const modsJSX = this.generateModsJSX(mods);
 
       return (
@@ -125,4 +124,4 @@ const mapStateToProps = state => ({
   posts: state.posts
 })
 
-export default connect(mapStateToProps)(withRouter(PostItem))
+export default connect(mapStateToProps)(withRouter(ActivityPostItem))

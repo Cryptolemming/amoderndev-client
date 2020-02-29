@@ -31,14 +31,16 @@ export class ActivityComments extends Component {
     return Object.entries(comments).reduce((acc, [id, comment]) => {
       console.log(comment.user, user.id)
       if (comment.user === user.id) {
-        return <ActivityCommentItem
+        acc.push(<ActivityCommentItem
                   controls={true}
                   mods={true}
                   handleDelete={this.handleDelete}
                   key={id}
                   {...comment}
-                />
+                />)
       }
+
+      return acc;
     }, [])
   }
 
