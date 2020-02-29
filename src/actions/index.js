@@ -274,13 +274,15 @@ export const fetchCommentsByUser = () => dispatch => {
 }
 
 export const deleteComment = (postId, commentId, history) => dispatch => {
+  console.log(postId, commentId)
   return fetch(`http://localhost:8000/api/comments/${postId}`, {
     method: 'DELETE',
-    body: {
+    body: JSON.stringify({
       comment_id: commentId
-    },
+    }),
     headers: {
-      'Authorization': `bearer ${getJWTToken()}`
+      'Authorization': `bearer ${getJWTToken()}`,
+      'Content-Type': 'application/json'
     }
   })
   .then(res => {

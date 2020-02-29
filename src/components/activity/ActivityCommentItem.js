@@ -24,11 +24,11 @@ export class ActivityCommentItem extends Component {
 
   render() {
     const date = getTimePassed(date_created)
-    const { id, user, username, date_created, content, mods,
-            handleDelete, favouritesUsers, post } = this.props;
+    const { user, username, date_created, content,
+            favouritesUsers, post } = this.props;
 
     const controlsJSX = this.generateControlsJSX();
-    const modsJSX = this.generateModsJSX(mods, id, post, handleDelete);
+    const modsJSX = this.generateModsJSX();
 
     return (
         <li className='activity-comment-item'>
@@ -50,7 +50,9 @@ export class ActivityCommentItem extends Component {
     )
   }
 
-  generateModsJSX = (mods, id, post, handleDelete) => {
+  generateModsJSX = () => {
+    const { mods, id, post, handleDelete } = this.props;
+
     return mods ? <span
                 key={uuid()}
                 className='activity-comment-control-item'
@@ -69,8 +71,6 @@ export class ActivityCommentItem extends Component {
     const activeClass = {
       'f': user && favouritesUsers.includes(user.id) ? 'active' : 'inactive',
     }
-
-    console.log(user.id, favouritesUsers)
 
     const controlsJSX = controls ? <span
         key={uuid()}

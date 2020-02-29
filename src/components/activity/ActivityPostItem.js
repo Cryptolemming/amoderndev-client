@@ -52,12 +52,12 @@ export class ActivityPostItem extends Component {
   }
 
   generateModsJSX = () => {
-    const { handleDelete, mods, id, dispatch } = this.props;
+    const { handleDelete, mods, id } = this.props;
 
     const modsJSX = mods.map(mod => {
       const actions = {
         'd': {
-          onClick: () => dispatch(handleDelete(id))
+          onClick: () => handleDelete(id)
         },
         'e': {}
       }
