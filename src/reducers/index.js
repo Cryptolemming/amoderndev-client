@@ -18,6 +18,8 @@ export default (state = initialState, action) => {
         return acc;
       }, {})
       return Object.assign({}, state, { posts })
+    case ACTIONS.ADD_POST_SUCCESS:
+      return Object.assign({}, state.posts, { ...state.posts, [action.post.id]: action.post })
     case ACTIONS.DELETE_POST_SUCCESS:
       const postsToDeleteFrom = Object.assign({}, state.posts)
       delete postsToDeleteFrom[action.postId]

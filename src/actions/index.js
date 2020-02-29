@@ -12,6 +12,12 @@ export const fetchPostsError = err => ({
   err
 })
 
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
+export const addPostSuccess = post => ({
+  type: ADD_POST_SUCCESS,
+  post
+})
+
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS';
 export const loginUserSuccess = user => ({
   type: LOGIN_USER_SUCCESS,
@@ -209,6 +215,33 @@ export const fetchPosts = () => dispatch => {
       dispatch(fetchPostsError(err))
 
     })
+}
+
+export const addPost = (title, topics, content, history) => dispatch => {
+  console.log(title, topics, content)
+  return fetch(`http://localhost:8000/api/posts/`, {
+    method: 'POST',
+    body: JSON.stringify({
+      title,
+      topics,
+      content
+    }),
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => {
+      if(!res.ok) {
+        throw 'Could not create post';
+      }
+      return res.json();
+    })
+    .then(post => {
+      dispatch(addPostSuccess(post))
+      history.push(`/posts/${post.id}`)
+    })
+    .catch(err => console.log(err))
 }
 
 export const deletePost = (postId, history) => dispatch => {

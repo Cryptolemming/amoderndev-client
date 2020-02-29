@@ -12,7 +12,18 @@ const postControlIcons = {
   'u': <i className="fas fa-chevron-up"></i>
 }
 
+const topics = [
+  'web development',
+  'javascript',
+  'data science',
+  'programming',
+  'science',
+  'focus',
+  'health'
+]
+
 export {
   navLinks,
-  postControlIcons
+  postControlIcons,
+  topics
 }
