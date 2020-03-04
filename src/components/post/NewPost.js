@@ -13,7 +13,38 @@ export class NewPost extends Component {
   state = {
     title: '',
     content: '',
-    topics: new Array(5).fill({id: '', value: ''})
+    topics: new Array(5).fill({id: '', title: ''})
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { posts, topics } = this.props;
+    // if editing, populate state with current post data
+    const path = this.props.location.pathname.split('/')
+    const location = path[1];
+    const postId = parseInt(path[2])
+    console.log(location, postId)
+    if (((prevProps.posts !== posts && topics) || (prevProps.topics !== topics && posts)) && location === 'edit-post') {
+      const currentPost = Object.values(posts)
+        .find(post => post.id === postId)
+      console.log(posts, currentPost, topics)
+      const { title, content, postTopics } = Object.assign(
+        {},
+        currentPost,
+        {
+          topics: this.state.topics.map((topic, idx) => {
+                    return {
+                      id: currentPost.topics[idx] ? currentPost.topics[idx].id : '',
+                      title: currentPost.topics[idx] ? currentPost.topics[idx].title : ''
+                    }
+                  })
+        })
+
+      console.log(title, content, postTopics)
+      this.setState((state, props) => ({
+        title, content, topics: postTopics
+      }))
+      console.log(this.state)
+    }
   }
 
   handleChangeTitle = e => {
@@ -30,13 +61,13 @@ export class NewPost extends Component {
 
   handleChangeTopics = e => {
     // get the index from the event select option
-    const value = e.target.value;
+    const title = e.target.value;
     const selectIdx = e.target.name[e.target.name.length-1] - 1;
     const optionIdx = e.target.options.selectedIndex;
     const option = e.target.options[optionIdx];
     const updatedTopic = {
       id: option.id,
-      value: value
+      title
     }
     const topicsSelected = [...this.state.topics]
     topicsSelected[selectIdx] = updatedTopic
@@ -59,9 +90,9 @@ export class NewPost extends Component {
   }
 
   render() {
+    console.log(this.state)
+    const topicsJSX = this.generateTopicsJSX();
 
-    const topicsJSX = this.generateTopicsJSX()
-  ;
     return (
       <section className='new-post'>
         <form onSubmit={this.handleSubmitNewPost} className='new-post-form'>
@@ -118,12 +149,12 @@ export class NewPost extends Component {
       --
     </option>)
 
-    return this.state.topics.map((value, idx) => {
+    return this.state.topics.map((topic, idx) => {
       return <select key={uuid()}
         name={`topic-${idx+1}`}
         className='topic-select'
         onChange={this.handleChangeTopics}
-        value={value.value}
+        value={topic.title}
         >
         {options}
       </select>
@@ -134,6 +165,7 @@ export class NewPost extends Component {
 
 // get topics from store so can also get their ids.
 const mapStateToProps = state => ({
+  posts: state.posts,
   topics: state.topics
 })
 

@@ -67,6 +67,10 @@ export class AModernDev extends Component {
                 <NewPost />
               </PrivateRoute>
 
+              <PrivateRoute exact path='/edit-post/:post_id'>
+                <NewPost />
+              </PrivateRoute>
+
               <Route
                 exact
                 path='/authenticate/:auth_type'
