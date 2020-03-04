@@ -4,7 +4,7 @@ import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { topics } from '../../constants';
 import uuid from 'uuid/v4';
-import { addPost } from '../../actions';
+import { addPost, editPost } from '../../actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
@@ -17,33 +17,37 @@ export class NewPost extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { posts, topics } = this.props;
-    // if editing, populate state with current post data
-    const path = this.props.location.pathname.split('/')
-    const location = path[1];
-    const postId = parseInt(path[2])
-    console.log(location, postId)
-    if (((prevProps.posts !== posts && topics) || (prevProps.topics !== topics && posts)) && location === 'edit-post') {
-      const currentPost = Object.values(posts)
-        .find(post => post.id === postId)
-      console.log(posts, currentPost, topics)
-      const { title, content, postTopics } = Object.assign(
-        {},
-        currentPost,
-        {
-          topics: this.state.topics.map((topic, idx) => {
-                    return {
-                      id: currentPost.topics[idx] ? currentPost.topics[idx].id : '',
-                      title: currentPost.topics[idx] ? currentPost.topics[idx].title : ''
-                    }
-                  })
-        })
+    const location = this.props.location.pathname.split('/');
+    const pathname = location[1];
+    const postId = parseInt(location[2]);
 
-      console.log(title, content, postTopics)
-      this.setState((state, props) => ({
-        title, content, topics: postTopics
-      }))
-      console.log(this.state)
+    if (pathname === 'edit-post') {
+      const { posts, topics } = this.props;
+
+      const prevPostsLength = Object.keys(prevProps.posts).length;
+      const prevTopicsLength = Object.keys(prevProps.topics).length;
+      const postsLength = Object.keys(posts).length;
+      const topicsLength = Object.keys(topics).length;
+
+      console.log(prevPostsLength, prevTopicsLength, postsLength, topicsLength)
+      if ((prevPostsLength !== postsLength && topicsLength > 0) ||
+          (prevTopicsLength !== topicsLength && postsLength > 0)) {
+            const stateTopics = [...this.state.topics]
+            const currentPost = Object.values(posts).find(post => post.id === postId);
+            console.log(stateTopics);
+            currentPost.topics.forEach((title, idx) => {
+              const topic = Object.values(topics).find(topic => topic.title === title);
+              console.log(topics)
+              stateTopics[idx] = topic;
+            })
+
+            console.log(currentPost, stateTopics)
+            this.setState({
+              title: currentPost.title,
+              content: currentPost.content,
+              topics: stateTopics
+            })
+      }
     }
   }
 
@@ -86,11 +90,18 @@ export class NewPost extends Component {
       return acc;
     }, [])
 
-    this.props.dispatch(addPost(title, selectedTopicIds, content, this.props.history))
+    const location = this.props.location.pathname.split('/');
+    const path = location[1];
+    const postId = parseInt(location[2]);
+
+    if (path === 'edit-post') {
+      this.props.dispatch(editPost(title, selectedTopicIds, content, this.props.history, postId))
+    } else {
+      this.props.dispatch(addPost(title, selectedTopicIds, content, this.props.history))
+    }
   }
 
   render() {
-    console.log(this.state)
     const topicsJSX = this.generateTopicsJSX();
 
     return (
@@ -117,7 +128,7 @@ export class NewPost extends Component {
             </label>
             <CKEditor
               editor={ ClassicEditor }
-              data=""
+              data={this.state.content}
               onInit={ editor => {
                   console.log( 'Editor is ready to use!', editor );
               } }

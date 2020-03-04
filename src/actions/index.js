@@ -244,6 +244,33 @@ export const addPost = (title, topics, content, history) => dispatch => {
     .catch(err => console.log(err))
 }
 
+export const editPost = (title, topics, content, history, postId) => dispatch => {
+
+  return fetch(`http://localhost:8000/api/posts/${postId}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+      title,
+      topics,
+      content
+    }),
+    headers: {
+      'Authorization': `bearer ${getJWTToken()}`,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(res => {
+      if(!res.ok) {
+        throw 'Could not edit post';
+      }
+      return res.json();
+    })
+    .then(post => {
+      dispatch(addPostSuccess(post))
+      history.push(`/posts/${post.id}`)
+    })
+    .catch(err => console.log(err))
+}
+
 export const deletePost = (postId, history) => dispatch => {
   return fetch(`http://localhost:8000/api/posts/${postId}`, {
     type: 'DELETE',
