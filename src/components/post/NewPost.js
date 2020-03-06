@@ -84,7 +84,7 @@ export class NewPost extends Component {
     e.preventDefault();
     const{ title, topics, content } = this.state;
     const selectedTopicIds = topics.reduce((acc, topic) => {
-      if (topic.value !== '') {
+      if (topic.title !== '') {
         acc.push(parseInt(topic.id))
       }
       return acc;

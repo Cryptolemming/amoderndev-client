@@ -54,7 +54,7 @@ export class Post extends Component {
       favouritesUsers: [],
       commenstUsers: []
     }
-
+    console.log(title, content, favouritesUsers)
     const date = getTimePassed(date_created)
     const topicJSX = this.generateTopicsJSX(topics)
     const controlsJSX = this.generateControlsJSX(comments.length,
